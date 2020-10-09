@@ -8,22 +8,10 @@ import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
 
-const podcasts_url = "http://localhost:3000/api/v1/podcasts";
-
 class App extends Component {
 
   state = {
     user: false,
-    podcasts: [],
-  }
-
-
-  getPodcasts = async () => {
-    const response = await fetch(podcasts_url);
-    const podcasts = await response.json()
-    this.setState({
-        podcasts: podcasts
-    });
   }
 
   handleLogoutClick = async (e) => {
@@ -49,7 +37,7 @@ class App extends Component {
 }
 
 
-  render() { 
+  render() {
     return (
       <div>
         <BrowserRouter>
@@ -62,13 +50,7 @@ class App extends Component {
               )}
             />
           <Route path="/playlist" component={Playlist} />
-          <Route path="/podcasts" 
-            render={() => (
-              <Podcasts
-                podcasts={this.state.podcasts}
-              />
-            )}
-          />
+          <Route path="/podcasts" component={Podcasts} />
           <Route 
             path="/login" 
             render={(props) => (
@@ -91,7 +73,6 @@ class App extends Component {
       </div>
     )
   }
-
 }
 
 export default App;
