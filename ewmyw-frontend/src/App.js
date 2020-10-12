@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Home from './components/Home';
 import Login from './components/auth/Login';
 import Navbar from './components/Navbar';
@@ -35,7 +35,6 @@ class App extends Component {
     // this.handleLogout();
     // window.location.href = '/';
 }
-
 
   render() {
     return (
