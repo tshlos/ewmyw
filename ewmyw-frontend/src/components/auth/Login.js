@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Login extends Component {
+export default class Login extends Component {
 
     state = {
         email: '',
@@ -31,8 +31,9 @@ class Login extends Component {
             }, 
             credentials: "include",
             body: JSON.stringify(user)
-        })
+        });
         const loggedInUser = await resp.json();
+        
         if (loggedInUser.logged_in) {
             window.location.href = '/podcasts';
         } else {
@@ -70,5 +71,3 @@ class Login extends Component {
         )
     }
 }
-
-export default Login;

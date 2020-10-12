@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Registration extends Component {
+export default class Registration extends Component {
 
     state = {
         first_name: '',
@@ -37,7 +37,7 @@ class Registration extends Component {
                 body: JSON.stringify(user)
             });
         } catch (e) {
-            console.log("Failed to login", e)
+            console.log("Failed to login", e);
         }
         const newUser = await resp.json();
         
@@ -46,10 +46,9 @@ class Registration extends Component {
         } else {
             this.setState({
                 isInvalid: true
-            })
+            });
         }
     }
-
 
     render() {
         return (
@@ -64,7 +63,7 @@ class Registration extends Component {
                     onChange={this.handleChange}
                     required
                 />
-                 <input
+                <input
                     type="last_name"
                     name="last_name"
                     placeholder="Last Name"
@@ -80,7 +79,6 @@ class Registration extends Component {
                     onChange={this.handleChange}
                     required
                 />
-
                 <input
                     type="password"
                     name="password"
@@ -90,11 +88,9 @@ class Registration extends Component {
                     required
                 />
                 {this.state.isInvalid && <div> Email already taken </div>}
-            <button type="submit">Register</button>
+                <button type="submit">Register</button>
             </form>
         </div>        
         )
     }
 }
-
-export default Registration;
