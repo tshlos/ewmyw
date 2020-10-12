@@ -29,7 +29,10 @@ export default class Podcasts extends Component {
             <div>
                 {this.state.podcasts.shows.map((podcast) => {
                     return (
-                        <PodcastCollection key={podcast.id} podcast={podcast} />
+                        <PodcastCollection 
+                            key={podcast.id} 
+                            podcast={podcast}
+                        />
                     )
                 })}
             </div>

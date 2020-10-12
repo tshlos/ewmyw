@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import Navbar from "../Navbar";
 
 export default class Login extends Component {
 
     state = {
         email: '',
-        password: '',
-        loginErrors: ''
+        password: ''
     }
 
     handleChange = (event) => {
@@ -33,7 +33,7 @@ export default class Login extends Component {
             body: JSON.stringify(user)
         });
         const loggedInUser = await resp.json();
-        
+ 
         if (loggedInUser.logged_in) {
             window.location.href = '/podcasts';
         } else {
@@ -42,6 +42,10 @@ export default class Login extends Component {
             });
         }
     }
+
+    // componentDidMount() {
+    //     this.handleSubmit();
+    // }
 
 
     render() {

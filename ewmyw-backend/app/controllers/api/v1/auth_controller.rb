@@ -60,8 +60,4 @@ class Api::V1::AuthController < ApplicationController
         response = JSON.parse(shows)
         render json: response, except: shows["available_markets"]
     end
-
-    # def spotify_params 
-    #     params.permit(:query)
-    # end
 end

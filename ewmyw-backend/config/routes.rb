@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create]
-      resources :registrations, only: [:create, :index]
+      resources :registrations, only: [:index, :create]
+      resources :favorites, only: [:index, :create, :show, :destroy]
 
       delete :logout, to: "sessions#logout"
-      get :logged_in, to: "sessions#logged_in"
+      get :logged_in, to: "sessions#logged_in?"
 
       get "/podcasts", to: "auth#spotify_request"
       get "/search", to: "auth#spotify_search"

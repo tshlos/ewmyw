@@ -11,11 +11,30 @@ import Registration from './components/auth/Registration';
 class App extends Component {
 
   state = {
-    user: false,
+    loggedInStatus: "not logged in"
   }
 
-  handleLogoutClick = async (e) => {
-    e.preventDefault();
+  handleSuccessfulAuth = async () => {
+    const resp = await fetch("http://localhost:3000/api/v1/logged_in", {
+      credentials: "include",
+      mode: "cors"
+    });
+    const userLoggedIn = await resp.json();
+    // console.log('user logged in?', userLoggedIn)
+    this.setState({
+      loggedInStatus: "logged in",
+      user: userLoggedIn.user
+    });
+  }
+
+
+  componentDidMount() {
+    this.handleSuccessfulAuth();
+  }
+
+
+  handleLogoutClick = async (event) => {
+    event.preventDefault();
     
     let resp;
     try {
@@ -27,14 +46,14 @@ class App extends Component {
         console.log("Failed to logout", e)
     }
     const userLoggedOut = await resp.json();
+    console.log("logged out user", userLoggedOut)
     this.setState({
-      user: userLoggedOut.logged_out,
-    })
-    // console.log("userLoggedOut", userLoggedOut)
-    // debugger
-    // this.handleLogout();
-    // window.location.href = '/';
-}
+      loggedInStatus: "Not logged in", 
+      user: {}
+    });
+    window.location.href = '/';
+  }
+
 
   render() {
     return (
@@ -56,6 +75,8 @@ class App extends Component {
               <Login 
                 {...props}
                 handleLogoutClick={this.handleLogoutClick}
+                handleSuccessfulAuth={this.handleSuccessfulAuth}
+
               />
             )} 
           />
