@@ -1,7 +1,8 @@
 class Api::V1::FavoritesController < ApplicationController
+    include CurrentUserConcern
 
     def index
-        favorites = Favorite.all
+        favorites = Favorite.find_by(user_id: @current_user.id)
         render json: favorites
     end
 
@@ -10,19 +11,32 @@ class Api::V1::FavoritesController < ApplicationController
         if favorite
             render json: favorite
         else
-            render json: { message: 'oops' }
+            render json: { message: 'oops, try again' }
         end
     end
 
+
     def create
-        favorite = Favorite.new(favorite_params)
-        render json: favorite 
+        @podcast = Podcast.find_by(podcast_id: params[:podcast_id])
+        if !@podcast 
+            Podcast.create(podcast_id: params[:podcast_id])
+        end
+       
+        favorite = Favorite.find_by(podcast_id: @podcast.id);
+        if !favorite 
+            Favorite.create!(
+                user_id: @current_user.id,
+                podcast_id: @podcast.id,
+            )
+        end
+        render json: favorite
     end
+
 
     private
     
     def favorite_params
-        params.permit(:id, :user_id, :podcast_id)
+        params.require(:favorite).permit(:podcast_id)
     end
 
 end

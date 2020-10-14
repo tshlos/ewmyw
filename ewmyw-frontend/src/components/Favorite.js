@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Playlist from './Playlist';
-import PodcastCollection from './PodcastCollection';
+import Podcast from './Podcast';
 import Podcasts from './Podcasts';
 
 

@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_000601) do
   enable_extension "plpgsql"
 
   create_table "favorites", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "podcast_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["podcast_id"], name: "index_favorites_on_podcast_id"
@@ -42,14 +42,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_000601) do
   end
 
   create_table "podcasts", force: :cascade do |t|
-    t.string "name"
-    t.string "show_id"
-    t.text "description"
-    t.string "url"
-    t.string "image"
-    t.string "publisher"
-    t.integer "total_episodes"
-    t.string "category"
+    t.string "podcast_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "../Navbar";
 
 export default class Login extends Component {
 
@@ -47,10 +46,10 @@ export default class Login extends Component {
     //     this.handleSubmit();
     // }
 
-
     render() {
         return (
-            <div id="login-form-wrapper" >             
+            <div id="login-form-wrapper" >   
+                {/* <h2> Login </h2>           */}
                 <form onSubmit={this.handleSubmit}>
                     <input
                         type="email"
@@ -69,7 +68,7 @@ export default class Login extends Component {
                         required
                     />
                     {this.state.isInvalid && <div> Invalid username or password </div>}
-                <button type="submit">Login</button>
+                <button className="btn" type="submit">Login</button>
                 </form>
             </div>
         )

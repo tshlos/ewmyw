@@ -6,11 +6,12 @@ Rails.application.routes.draw do
       resources :registrations, only: [:index, :create]
       resources :favorites, only: [:index, :create, :show, :destroy]
 
+
       delete :logout, to: "sessions#logout"
       get :logged_in, to: "sessions#logged_in?"
 
-      get "/podcasts", to: "auth#spotify_request"
-      get "/search", to: "auth#spotify_search"
+      get "/podcasts", to: "spotify#spotify_request"
+      get "/search", to: "spotify#spotify_search"
 
     end
   end

@@ -8,7 +8,7 @@ import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
 
-class App extends Component {
+export default class App extends Component {
 
   state = {
     loggedInStatus: "not logged in"
@@ -20,7 +20,6 @@ class App extends Component {
       mode: "cors"
     });
     const userLoggedIn = await resp.json();
-    // console.log('user logged in?', userLoggedIn)
     this.setState({
       loggedInStatus: "logged in",
       user: userLoggedIn.user
@@ -46,7 +45,6 @@ class App extends Component {
         console.log("Failed to logout", e)
     }
     const userLoggedOut = await resp.json();
-    console.log("logged out user", userLoggedOut)
     this.setState({
       loggedInStatus: "Not logged in", 
       user: {}
@@ -68,15 +66,14 @@ class App extends Component {
               )}
             />
           <Route path="/playlist" component={Playlist} />
-          <Route path="/podcasts" component={Podcasts} />
+          <Route path="/podcasts" component={Podcasts} 
+          />
           <Route 
             path="/login" 
             render={(props) => (
               <Login 
                 {...props}
                 handleLogoutClick={this.handleLogoutClick}
-                handleSuccessfulAuth={this.handleSuccessfulAuth}
-
               />
             )} 
           />
@@ -94,5 +91,3 @@ class App extends Component {
     )
   }
 }
-
-export default App;

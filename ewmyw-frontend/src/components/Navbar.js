@@ -9,12 +9,14 @@ export default class Navbar extends Component {
         // console.log(userName, 'username')
 
         return (
-            <div>
-                <NavLink to="/"> Home </NavLink>
-                {this.props.user ? <NavLink to="/logout" onClick={this.props.handleLogoutClick}>Logout</NavLink> : <NavLink to="/login">Login</NavLink>}
-                <NavLink to="/signup"> Signup </NavLink>
-                <NavLink to="/podcasts"> Podcasts </NavLink>
-                <NavLink to="/playlist"> Playlist </NavLink>
+            <div className="navbar-container">
+                <div className="navbar">
+                    <NavLink to="/"> Home </NavLink>
+                    <NavLink to="/podcasts"> Podcasts </NavLink>
+                    <NavLink to="/playlist"> Playlist </NavLink>
+                    {this.props.user ? <NavLink to="/logout" onClick={this.props.handleLogoutClick}>Logout</NavLink> : <NavLink to="/login">Login</NavLink>}
+                    <NavLink to="/signup"> Signup </NavLink>
+                </div>
             </div>
         )
     }

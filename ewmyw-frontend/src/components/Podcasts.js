@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PodcastCollection from "./PodcastCollection";
+import Podcast from "./Podcast";
 
 
 const podcastsUrl = "http://localhost:3000/api/v1/podcasts";
@@ -29,7 +29,7 @@ export default class Podcasts extends Component {
             <div>
                 {this.state.podcasts.shows.map((podcast) => {
                     return (
-                        <PodcastCollection 
+                        <Podcast 
                             key={podcast.id} 
                             podcast={podcast}
                         />
