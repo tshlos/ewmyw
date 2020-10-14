@@ -1,4 +1,6 @@
 class Api::V1::SpotifyController < ApplicationController
+    include CurrentUserConcern
+
 
     def get_token
         body = {
@@ -43,7 +45,7 @@ class Api::V1::SpotifyController < ApplicationController
         end
         type = "show"
         market = "US"
-        offset = "20"
+        offset = "100"
         limit = "30"
         
         # RestClient.proxy = "http://localhost:8888"
@@ -57,6 +59,13 @@ class Api::V1::SpotifyController < ApplicationController
             :headers => header
         )
         response = JSON.parse(shows)
+        ids = response["shows"]["items"].map {|podcast| podcast["id"]}
+        
+        favorites = Favorite.where(user_id: @current_user.id).where("podcast_id in (?)", ids)
+        # byebug
+        # response["favorite podcasts"] = favorites
+        
+
         render json: response, except: shows["available_markets"]
     end
 end

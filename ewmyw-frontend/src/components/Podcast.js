@@ -8,7 +8,7 @@ export default class Podcast extends Component {
         myPodcasts: []
     }
 
-
+    
     addPodcastToFavorite = () => {
         this.setState({
             isFavorite: !this.state.isFavorite
@@ -30,7 +30,19 @@ export default class Podcast extends Component {
             credentials: "include",
             body: JSON.stringify(podcast)
         });
+        
         const podInfo = await response.json();
+
+        console.log('fetch to add like infooo', podInfo)
+        console.log('podcasttttt user', this.props.user)
+        // debugger
+        // this.props.user.favorites.map(favorite => {
+        //     if (favorite.podcast_id === podInfo.podcast_id) {
+        //         this.setState({
+        //             favorite: true 
+        //         })
+        //     }
+        // })
     }
 
     // removePodcast = (pod) => {

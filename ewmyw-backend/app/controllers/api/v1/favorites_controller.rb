@@ -36,7 +36,7 @@ class Api::V1::FavoritesController < ApplicationController
     private
     
     def favorite_params
-        params.require(:favorite).permit(:podcast_id)
+        params.require(:favorite).permit(:podcast_id, :user_id)
     end
 
 end

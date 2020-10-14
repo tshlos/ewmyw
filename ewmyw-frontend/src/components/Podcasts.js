@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Podcast from "./Podcast";
 
 
-const podcastsUrl = "http://localhost:3000/api/v1/podcasts";
-
 export default class Podcasts extends Component {
 
     state = {
@@ -13,7 +11,7 @@ export default class Podcasts extends Component {
     }
 
     getPodcasts = async () => {
-        const response = await fetch(podcastsUrl);
+        const response = await fetch("http://localhost:3000/api/v1/podcasts");
         const podcasts = await response.json()
         this.setState({
             podcasts: podcasts
@@ -32,6 +30,7 @@ export default class Podcasts extends Component {
                         <Podcast 
                             key={podcast.id} 
                             podcast={podcast}
+                            user={this.props.user}
                         />
                     )
                 })}
@@ -39,3 +38,4 @@ export default class Podcasts extends Component {
         )
     }
 }
+

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 export default class Navbar extends Component {
 
     render() {
-        console.log('user', this.props.user)
         // const userName = this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1);
         // console.log(userName, 'username')
 
