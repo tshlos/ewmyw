@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PodcastCollection from "./PodcastCollection";
+import Podcast from "./Podcast";
 
 export default class Home extends Component {
 
@@ -8,7 +8,7 @@ export default class Home extends Component {
             shows: {
                 items: []
             },
-            search: ""
+            search: ""        
         }
     }
 
@@ -27,13 +27,13 @@ export default class Home extends Component {
 
     handleSearchChange = async (e) => {
         const search = e.target.value;
+        // debugger
         e.preventDefault();
         const url = new URL("http://localhost:3000/api/v1/search");
         url.searchParams.append("query", e.target.value);
         const result = await fetch(url.toString());
         const filteredPodcasts = await result.json()
         this.setState({
-            search,
             podcasts: filteredPodcasts
         });
     }
@@ -42,9 +42,10 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <div className="search-field"> 
-                    <input 
-                        type="text" 
+                <div className="search-container">
+                    <input
+                    className="search-input"
+                        type="text"
                         placeholder="Search..."
                         onChange={this.handleSearchChange}
                     />
@@ -53,13 +54,13 @@ export default class Home extends Component {
 
                 {this.state.podcasts.shows.items.map((podcast) => {
                     return (
-                        <PodcastCollection 
-                            key={podcast.id} 
-                            podcast={podcast} 
+                        <Podcast
+                            key={podcast.id}
+                            podcast={podcast}
                         />
                     )
                 })}
-        </div>
+            </div>
 
             // <div className="wrapper"> 
             //     <div>
@@ -73,7 +74,7 @@ export default class Home extends Component {
             //         />
             //         <button className="search"> Search </button>
             //     </div>
-        
+
             //     <div>
             //         {this.state.podcasts.shows.items.map((podcast) => {
             //             return (

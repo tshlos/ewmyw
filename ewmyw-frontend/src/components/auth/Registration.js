@@ -53,7 +53,7 @@ export default class Registration extends Component {
     render() {
         return (
         <div id="signup-form-wrapper">
-            <h2> Registration </h2>
+            {/* <h2> Sign Up </h2> */}
             <form onSubmit={this.handleSubmit}>
                 <input
                     type="first_name"
@@ -88,7 +88,9 @@ export default class Registration extends Component {
                     required
                 />
                 {this.state.isInvalid && <div> Email already taken </div>}
-                <button type="submit">Register</button>
+                <div className="btn-border-wrap">
+                    <button className="btn" type="submit">Sign up</button>
+                </div>
             </form>
         </div>        
         )

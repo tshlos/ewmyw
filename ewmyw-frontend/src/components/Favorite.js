@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import Playlist from './Playlist';
+import Podcast from './Podcast';
+import Podcasts from './Podcasts';
 
 
 export default class Favorite extends Component {
 
-    state = {
-        favorites: []
-    }
 
-    addPodcastToFavorite = (pod) => {
-        console.log("addPodcastToFavorite", pod)
-
-    }
-
+    // removeFromFavorites = (pod) => {
+    //     this.setState(prevState => {
+    //         return {
+    //             favorites: prevState.favorites.filter(podcast => podcast !== pod)
+    //         }
+    //     })
+    // }
 
     render() {
         return (
             <div>
-              
+        
             </div>
         )
     }

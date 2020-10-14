@@ -4,8 +4,7 @@ export default class Login extends Component {
 
     state = {
         email: '',
-        password: '',
-        loginErrors: ''
+        password: ''
     }
 
     handleChange = (event) => {
@@ -33,7 +32,7 @@ export default class Login extends Component {
             body: JSON.stringify(user)
         });
         const loggedInUser = await resp.json();
-        
+ 
         if (loggedInUser.logged_in) {
             window.location.href = '/podcasts';
         } else {
@@ -43,10 +42,14 @@ export default class Login extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     this.handleSubmit();
+    // }
 
     render() {
         return (
-            <div id="login-form-wrapper" >             
+            <div id="login-form-wrapper" >   
+                {/* <h2> Login </h2>           */}
                 <form onSubmit={this.handleSubmit}>
                     <input
                         type="email"
@@ -65,7 +68,7 @@ export default class Login extends Component {
                         required
                     />
                     {this.state.isInvalid && <div> Invalid username or password </div>}
-                <button type="submit">Login</button>
+                <button className="btn" type="submit">Login</button>
                 </form>
             </div>
         )

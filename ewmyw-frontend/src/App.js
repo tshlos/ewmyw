@@ -8,14 +8,32 @@ import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
 
-class App extends Component {
+export default class App extends Component {
 
   state = {
-    user: false,
+    loggedInStatus: "not logged in"
   }
 
-  handleLogoutClick = async (e) => {
-    e.preventDefault();
+  handleSuccessfulAuth = async () => {
+    const resp = await fetch("http://localhost:3000/api/v1/logged_in", {
+      credentials: "include",
+      mode: "cors"
+    });
+    const userLoggedIn = await resp.json();
+    this.setState({
+      loggedInStatus: "logged in",
+      user: userLoggedIn.user
+    });
+  }
+
+
+  componentDidMount() {
+    this.handleSuccessfulAuth();
+  }
+
+
+  handleLogoutClick = async (event) => {
+    event.preventDefault();
     
     let resp;
     try {
@@ -28,13 +46,12 @@ class App extends Component {
     }
     const userLoggedOut = await resp.json();
     this.setState({
-      user: userLoggedOut.logged_out,
-    })
-    // console.log("userLoggedOut", userLoggedOut)
-    // debugger
-    // this.handleLogout();
-    // window.location.href = '/';
-}
+      loggedInStatus: "Not logged in", 
+      user: {}
+    });
+    window.location.href = '/';
+  }
+
 
   render() {
     return (
@@ -49,7 +66,8 @@ class App extends Component {
               )}
             />
           <Route path="/playlist" component={Playlist} />
-          <Route path="/podcasts" component={Podcasts} />
+          <Route path="/podcasts" component={Podcasts} 
+          />
           <Route 
             path="/login" 
             render={(props) => (
@@ -73,5 +91,3 @@ class App extends Component {
     )
   }
 }
-
-export default App;
