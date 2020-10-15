@@ -61,7 +61,6 @@ class Api::V1::SpotifyController < ApplicationController
         response = JSON.parse(shows)
         ids = response["shows"]["items"].map {|podcast| podcast["id"]} #array of long str ids
     
-
         podcasts = Podcast.where("podcast_id in (?)", ids)
         podcast_ids = podcasts.map { |podcast| podcast.id } #integer ids
         favorites = Favorite.where(user_id: @current_user.id).where("podcast_id in (?)", podcast_ids)
@@ -72,10 +71,11 @@ class Api::V1::SpotifyController < ApplicationController
             
             pod = podcasts.find {|podcast| podcast.podcast_id == spotify_id} #object containing the podcast check if integer id matches string id
             if pod
-                # byebug
+                # debugger
                 fav_pod = favorites.find {|favorite| favorite.podcast_id == pod.id }
                 if fav_pod
                     podcast["is_favorite"] = true
+                    podcast["favorite_id"] = fav_pod.id
                 end
             end
         end

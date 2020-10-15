@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       get "/podcasts", to: "spotify#spotify_request"
       get "/search", to: "spotify#spotify_search"
 
+      # delete "/favorites", to: "favorites#destroy"
+
     end
   end
 end

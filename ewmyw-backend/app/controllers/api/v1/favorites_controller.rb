@@ -32,17 +32,21 @@ class Api::V1::FavoritesController < ApplicationController
         render json: favorite
     end
 
-    def update
-        favorite = Favorite.find(podcast_id: params[:podcast_id])
-        favorite.update(favorite_params)
-        render json: favorite
-        byebug
-    end
+    # def update
+    #     favorite = Favorite.find_by(podcast_id: params[:podcast_id])
+    #     favorite.update(favorite_params)
+    #     render json: favorite
+    #     # byebug
+
+    # end
 
     def destroy 
-        favorite = Favorite.find(podcast_id: params[:id])
+        # @podcast = Podcast.find_by(podcast_id: params[:podcast_id])
+        favorite = Favorite.find_by(params[:podcast_id])
+        # byebug
+        # byebug
         favorite.destroy
-        render json: {message: "favorite has been deleted"}
+        render json: favorite
     end
 
 

@@ -8,7 +8,7 @@ export default class Podcast extends Component {
         super()
         this.state = {
             isFavorite: props.podcast.is_favorite,
-            myPodcasts: []
+            podcasts: []
         }
     }
 
@@ -37,27 +37,18 @@ export default class Podcast extends Component {
         const podInfo = await response.json();
     }
 
-    // removePodcastLike = (pod) => {
-    //     console.log('liked pod', pod)
-    //     // this.setState(prevState => {
-    //     //     return {
-    //     //         myPodcasts: prevState.myPodcasts.filter(i => i !== pod)
-    //     //     }
-    //     // })
-    // }
 
-    // deletePodcast = (pod) => {
-    //     debugger
-    //     // const id = pod.id;
-    //     // this.setState({
-    //     //     pods: this.state.pods.filter(pod => {
-    //     //         return pod.id !== id
-    //     //     })
-    //     // })
-    //     // fetch("http://localhost:3000/api/v1/favorites" + `/${id}`), {
-    //     //     method: 'DELETE'
-    //     // }
-    // }
+    removeLike = () => {
+        const id = this.props.podcast.favorite_id;
+        if (this.state.isFavorite) {
+            this.setState({
+                isFavorite: !this.state.isFavorite
+            })
+            fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
+                method: "DELETE"
+            })
+        }
+    }
 
 
     render() {
@@ -74,8 +65,7 @@ export default class Podcast extends Component {
                             <div className="card-info">
                                 <h2> {name} </h2>
                                 <FaHeart
-                                    onClick={() => this.addPodcastToFavorite()}
-                                    // onClick={() => this.removePodcastLike()}
+                                    onClick={() => this.state.isFavorite ? this.removeLike() : this.addPodcastToFavorite()}
                                     size={25}
                                     color={this.state.isFavorite ? "#ff3232" : "#c3c6c1"}
                                 />

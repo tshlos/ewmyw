@@ -25,7 +25,6 @@ class Api::V1::SessionsController < ApplicationController
                 logged_in: true,
                 # user: @current_user
                 user: UserSerializer.new(@current_user)
-
             }
         else
             render json: {
