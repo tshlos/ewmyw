@@ -4,6 +4,7 @@ import { motion, useMotionValue } from "framer-motion";
 import { findIndex, Position } from "./DragReorder";
 import move from "array-move";
 
+
 const Item = ({ color, setPosition, moveItem, i }) => {
   const [isDragging, setDragging] = useState(false);
 

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import Home from "./Home";
 import Podcast from "./Podcast";
 
 
 export default class Podcasts extends Component {
 
     state = {
-        podcasts: {
+        defaultPodcasts: {
             shows: []
         }
     }
@@ -14,7 +15,7 @@ export default class Podcasts extends Component {
         const response = await fetch("http://localhost:3000/api/v1/podcasts");
         const podcasts = await response.json()
         this.setState({
-            podcasts: podcasts
+            defaultPodcasts: podcasts
         });
     }
 
@@ -25,7 +26,7 @@ export default class Podcasts extends Component {
     render() {
         return (
             <div>
-                {this.state.podcasts.shows.map((podcast) => {
+                {this.state.defaultPodcasts.shows.map((podcast) => {
                     return (
                         <Podcast 
                             key={podcast.id} 

@@ -45,7 +45,7 @@ class Api::V1::SpotifyController < ApplicationController
         end
         type = "show"
         market = "US"
-        offset = "100"
+        offset = "20"
         limit = "30"
         
         # RestClient.proxy = "http://localhost:8888"
@@ -59,13 +59,26 @@ class Api::V1::SpotifyController < ApplicationController
             :headers => header
         )
         response = JSON.parse(shows)
-        ids = response["shows"]["items"].map {|podcast| podcast["id"]}
-        
-        favorites = Favorite.where(user_id: @current_user.id).where("podcast_id in (?)", ids)
-        # byebug
-        # response["favorite podcasts"] = favorites
-        
+        ids = response["shows"]["items"].map {|podcast| podcast["id"]} #array of long str ids
+    
 
+        podcasts = Podcast.where("podcast_id in (?)", ids)
+        podcast_ids = podcasts.map { |podcast| podcast.id } #integer ids
+        favorites = Favorite.where(user_id: @current_user.id).where("podcast_id in (?)", podcast_ids)
+        
+        response["shows"]["items"].each do |podcast| 
+            podcast["is_favorite"] = false
+            spotify_id = podcast["id"]
+            
+            pod = podcasts.find {|podcast| podcast.podcast_id == spotify_id} #object containing the podcast check if integer id matches string id
+            if pod
+                # byebug
+                fav_pod = favorites.find {|favorite| favorite.podcast_id == pod.id }
+                if fav_pod
+                    podcast["is_favorite"] = true
+                end
+            end
+        end
         render json: response, except: shows["available_markets"]
     end
 end

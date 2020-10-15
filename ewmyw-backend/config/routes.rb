@@ -4,8 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :sessions, only: [:create]
       resources :registrations, only: [:index, :create]
-      resources :favorites, only: [:index, :create, :show, :destroy]
-
+      resources :favorites, only: [:index, :create, :show, :update, :destroy]
 
       delete :logout, to: "sessions#logout"
       get :logged_in, to: "sessions#logged_in?"
