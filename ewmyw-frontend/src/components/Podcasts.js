@@ -1,22 +1,21 @@
 import React, { Component } from "react";
+import Home from "./Home";
 import Podcast from "./Podcast";
 
-
-const podcastsUrl = "http://localhost:3000/api/v1/podcasts";
 
 export default class Podcasts extends Component {
 
     state = {
-        podcasts: {
+        defaultPodcasts: {
             shows: []
         }
     }
 
     getPodcasts = async () => {
-        const response = await fetch(podcastsUrl);
+        const response = await fetch("http://localhost:3000/api/v1/podcasts");
         const podcasts = await response.json()
         this.setState({
-            podcasts: podcasts
+            defaultPodcasts: podcasts
         });
     }
 
@@ -27,11 +26,12 @@ export default class Podcasts extends Component {
     render() {
         return (
             <div>
-                {this.state.podcasts.shows.map((podcast) => {
+                {this.state.defaultPodcasts.shows.map((podcast) => {
                     return (
                         <Podcast 
                             key={podcast.id} 
                             podcast={podcast}
+                            user={this.props.user}
                         />
                     )
                 })}
@@ -39,3 +39,4 @@ export default class Podcasts extends Component {
         )
     }
 }
+

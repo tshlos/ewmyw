@@ -20,6 +20,7 @@ export default class App extends Component {
       mode: "cors"
     });
     const userLoggedIn = await resp.json();
+    console.log("user", userLoggedIn)
     this.setState({
       loggedInStatus: "logged in",
       user: userLoggedIn.user
@@ -49,7 +50,7 @@ export default class App extends Component {
       loggedInStatus: "Not logged in", 
       user: {}
     });
-    window.location.href = '/';
+    window.location.href = '/login';
   }
 
 
@@ -66,7 +67,11 @@ export default class App extends Component {
               )}
             />
           <Route path="/playlist" component={Playlist} />
-          <Route path="/podcasts" component={Podcasts} 
+          {/* <Route path="/podcasts" component={Podcasts}/> */}
+          <Route path="/podcasts" 
+            render={props => 
+              <Podcasts user={this.state.user} />
+            }
           />
           <Route 
             path="/login" 
