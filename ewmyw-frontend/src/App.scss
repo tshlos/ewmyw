@@ -4,9 +4,14 @@
 
 /* SIGNUP FORM*/
 #signup-form-wrapper  {
-  width: 300px;
-  margin: auto;
-  padding: 15em;
+  position: relative;
+  width: 300px;          
+  height: 200px;        
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -190px;    
+  margin-left: -150px;    
 }
 #signup-form-wrapper input {
   align-self: flex-start;
@@ -47,11 +52,11 @@
   outline: none; 
 }
 
-.btn {
+.button {
   cursor: pointer;
-  display: block;
+  display: flex;
   align-items: center;
-  width: 90%;
+  justify-content: center;  
   margin: auto;
   max-width: 7em;
   position: relative;
@@ -78,21 +83,17 @@
 }
 
 /*NAVBAR*/
-// .navbar-container {
-//   margin: 0 auto;
-//   max-width: 1000px;
-// }
 .navbar {
-  box-sizing: border-box;
+  // box-sizing: border-box;
   background-color: black;
-  margin: 0;
-  padding: 0;
+  // margin: 0;
+  // padding: 0;
   height: 8vh;
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
+  // align-items: center;
+  // justify-content: center;
+  // margin-left: auto;
   font-size: 17px
 }
 .navbar a {
@@ -106,76 +107,113 @@
 }
 
 
-/* Podcast Container */
-.card {
-  position: relative;
-  bottom: 0;
-  top: 70px;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.1);
-  color: #f1f1f1;
-  width: 800px;
-  height: 350px;
-  margin: 300px auto;
-  padding: 20px;
+/* PODCASTS */
+$font-color: #A2A2A2;
+$primary-color: #63B7E6;
+#podcast {
+  // font-family: 'Raleway', sans-serif;
+  // padding: 50px 0;
+  background: #fff;
+  text-align: center;
+  // word-wrap: break-word;
+
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .card-image {
+    width: 80%;
+  }
+  .card-name {
+    font-size: 25px;
+    margin-top: -30px;
+    margin-bottom: .5em;
+    font-family: 'Oswald', sans-serif;
+  }
+  .card {
+    border: none;
+  }
+  .heart {
+    margin-left: 12px;
+  }
+
+  ul {
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    list-style: none;
+    li {
+      padding: 40px;
+      width: 350px;
+      transition: box-shadow .3s;
+      height: 500px;
+
+      &:hover {
+        box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      &:hover span {
+        color: $primary-color;
+      }
+      &:hover p {
+        color: #555;
+      }
+      &:hover h3 {
+        color: $primary-color;
+      }
+      &:hover h3:after{
+        width: 25px;
+      }
+      span {
+        font-size: 2.6em;
+        display: block;
+        transition: color .3s;
+        color: $font-color;
+        &:before, &:after {
+          position: static;
+        }
+      }
+
+      // h3 {
+      //   color: darken($font-color, 20%);
+      //   display: inline-block;
+      //   font-size: 24px;
+      //   font-weight: 100;
+      //   transition: color .3s;
+      //   &:after {
+      //     content: '';
+      //     position: relative;
+      //     left: 50%;
+      //     top: 20px;
+      //     transform: translateX(-50%);
+      //     display: block;
+      //     width: 40px;
+      //     height: 1px;
+      //     background: darken($font-color, 20%);
+      //     transition: width .3s;
+      //   }
+      // }
+      // p {
+      //   color: $font-color;
+      //   text-align: left;
+      //   text-indent: 1em;
+      //   font-size: 16px;
+      //   line-height: 26px;
+      //   transition: color .3s;
+      // }
+    }
+  }
 }
 
-.card-image {
-  float: left;
-	position: relative;
-	left: 30px;
-	top: -30px;
-	height: 300px;
-	width: 300px;
-	-webkit-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
-	overflow: hidden;
+.all-podcasts {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 5rem;
 }
-
-.card-text {
-  margin-left: 370px;
-	margin-right: 30px;
-}
-
-.card-info {
-  padding-top: 5px;
-	// font-size: 1rem;
-  color: #4B4B4B;
-}
-
-.separator {
-  margin-top: 5px;
-	border: 1px solid #C3C3C3;
-}
-
-.podcast-description {
-  text-align: justify;
-	padding-top: 5px;
-	font-size: 0.80rem;
-	line-height: 150%;
-	color: #4B4B4B;
-}
-
-.podcast-publisher {
-  position: absolute;
-	left: 50px;
-	bottom: 10px;
-	font-size: 1.5rem;
-	color: #C3C3C3;
-}
-
-.podcast-eps {
-  position: absolute;
-	left: 50px;
-	bottom: 0px;
-	font-size: .7rem;
-	color: #C3C3C3;
-}
-
-
-
-
 
 
 /*Parallax Scrolling*/

@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class App extends Component {
 
@@ -27,11 +28,9 @@ export default class App extends Component {
     });
   }
 
-
   componentDidMount() {
     this.handleSuccessfulAuth();
   }
-
 
   handleLogoutClick = async (event) => {
     event.preventDefault();
@@ -67,12 +66,7 @@ export default class App extends Component {
               )}
             />
           <Route path="/playlist" component={Playlist} />
-          {/* <Route path="/podcasts" component={Podcasts}/> */}
-          <Route path="/podcasts" 
-            render={props => 
-              <Podcasts user={this.state.user} />
-            }
-          />
+          <Route path="/podcasts" component={Podcasts}/>
           <Route 
             path="/login" 
             render={(props) => (

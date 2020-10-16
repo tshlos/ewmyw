@@ -31,7 +31,6 @@ export default class Podcasts extends Component {
                         <Podcast 
                             key={podcast.id} 
                             podcast={podcast}
-                            user={this.props.user}
                         />
                     )
                 })}

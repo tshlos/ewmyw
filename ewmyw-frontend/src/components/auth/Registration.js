@@ -42,7 +42,7 @@ export default class Registration extends Component {
         const newUser = await resp.json();
         
         if (newUser.status === 'created') {
-            window.location.href = '/podcasts';
+            window.location.href = '/';
         } else {
             this.setState({
                 isInvalid: true
@@ -52,47 +52,49 @@ export default class Registration extends Component {
 
     render() {
         return (
-        <div id="signup-form-wrapper">
-            {/* <h2> Sign Up </h2> */}
-            <form onSubmit={this.handleSubmit}>
-                <input
-                    type="first_name"
-                    name="first_name"
-                    placeholder="First Name"
-                    value={this.state.first_name}
-                    onChange={this.handleChange}
-                    required
-                />
-                <input
-                    type="last_name"
-                    name="last_name"
-                    placeholder="Last Name"
-                    value={this.state.last_name}
-                    onChange={this.handleChange}
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    required
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    required
-                />
-                {this.state.isInvalid && <div> Email already taken </div>}
-                <div className="btn-border-wrap">
-                    <button className="btn" type="submit">Sign up</button>
-                </div>
-            </form>
-        </div>        
+            <div className="signup-container">
+                <div id="signup-form-wrapper">
+                    {/* <h2> Sign Up </h2> */}
+                    <form onSubmit={this.handleSubmit}>
+                        <input
+                            type="first_name"
+                            name="first_name"
+                            placeholder="First Name"
+                            value={this.state.first_name}
+                            onChange={this.handleChange}
+                            required
+                        />
+                        <input
+                            type="last_name"
+                            name="last_name"
+                            placeholder="Last Name"
+                            value={this.state.last_name}
+                            onChange={this.handleChange}
+                            required
+                        />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                            required
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            required
+                        />
+                        {this.state.isInvalid && <div> Email already taken </div>}
+                        <div className="button">
+                            <button className="btn" type="submit">Sign up</button>
+                        </div>
+                    </form>
+                </div>        
+            </div> 
         )
     }
 }

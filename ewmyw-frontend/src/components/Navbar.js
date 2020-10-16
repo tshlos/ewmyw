@@ -8,7 +8,7 @@ export default class Navbar extends Component {
         // console.log(userName, 'username')
 
         return (
-            <div className="navbar-container">
+            <div className="navbar-container"> 
                 <div className="navbar">
                     <NavLink to="/"> Home </NavLink>
                     {/* <NavLink to="/podcasts"> Podcasts </NavLink> */}
