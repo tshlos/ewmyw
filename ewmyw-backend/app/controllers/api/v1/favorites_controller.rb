@@ -41,10 +41,7 @@ class Api::V1::FavoritesController < ApplicationController
     # end
 
     def destroy 
-        # @podcast = Podcast.find_by(podcast_id: params[:podcast_id])
         favorite = Favorite.find_by(params[:podcast_id])
-        # byebug
-        # byebug
         favorite.destroy
         render json: favorite
     end
