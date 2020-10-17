@@ -66,10 +66,29 @@ export default class Home extends Component {
 
 
     handleLoadMore = () => {
+    
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
+            console.log("fetch more podcasts")
+            return;
+        }
+    
         this.setState({
             pages: this.state.pages + 1 
-        });
+        }); 
     }
+
+    
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleLoadMore);
+        return () => window.removeEventListener("scroll", this.handleLoadMore);
+    }
+
+
+    // handleScroll = () => {
+    //     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
+    //         console.log("fetch more podcasts")
+    //     }
+    // }
 
 
     render() {
@@ -103,7 +122,7 @@ export default class Home extends Component {
                     </div> */}
                 {/* <Scroll page={this.state.pages} /> */}
                 {arr}
-                <button onClick={this.handleLoadMore} >Load more</button>
+                {/* <button onClick={this.handleLoadMore} >Load more</button> */}
             </div>
         )
     }
