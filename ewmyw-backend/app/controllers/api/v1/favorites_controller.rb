@@ -15,37 +15,28 @@ class Api::V1::FavoritesController < ApplicationController
         end
     end
 
-
     def create
-        @podcast = Podcast.find_by(podcast_id: params[:podcast_id])
-        if !@podcast 
-            Podcast.create(podcast_id: params[:podcast_id])
+        podcast = Podcast.find_by(podcast_id: params[:podcast_id])
+        # byebug
+        if !podcast 
+            podcast = Podcast.create(podcast_id: params[:podcast_id])
         end
        
-        favorite = Favorite.find_by(podcast_id: @podcast.id);
+        favorite = Favorite.find_by(podcast_id: podcast.id);
         if !favorite 
             Favorite.create!(
                 user_id: @current_user.id,
-                podcast_id: @podcast.id,
+                podcast_id: podcast.id,
             )
         end
         render json: favorite
     end
-
-    # def update
-    #     favorite = Favorite.find_by(podcast_id: params[:podcast_id])
-    #     favorite.update(favorite_params)
-    #     render json: favorite
-    #     # byebug
-
-    # end
 
     def destroy 
         favorite = Favorite.find_by(params[:podcast_id])
         favorite.destroy
         render json: favorite
     end
-
 
     private
     

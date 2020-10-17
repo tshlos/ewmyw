@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { FaHeart, FaPlayCircle } from "react-icons/fa";
+// import { FaHeart, FaPlayCircle } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+
 
 export default class Podcast extends Component {
 
@@ -32,7 +34,9 @@ export default class Podcast extends Component {
             body: JSON.stringify(podcast)
         });
         const podInfo = await response.json();
+        console.log("pod info", podInfo)
     }
+
 
     removeLike = () => {
         const id = this.props.podcast.favorite_id;

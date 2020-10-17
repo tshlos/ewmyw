@@ -26,6 +26,8 @@ export default class App extends Component {
       loggedInStatus: "logged in",
       user: userLoggedIn.user
     });
+    console.log('user logged in', userLoggedIn)
+    // debugger
   }
 
   componentDidMount() {
@@ -54,6 +56,7 @@ export default class App extends Component {
 
 
   render() {
+    // debugger
     return (
       <div>
         <BrowserRouter>
@@ -65,7 +68,14 @@ export default class App extends Component {
                 /> 
               )}
             />
-          <Route path="/playlist" component={Playlist} />
+          {/* <Route path="/playlist" component={Playlist} /> */}
+          <Route path="/playlist" 
+            render={props => (
+              <Playlist 
+                user={this.state.user}
+              />
+            )}
+          />
           <Route path="/podcasts" component={Podcasts}/>
           <Route 
             path="/login" 
@@ -83,7 +93,7 @@ export default class App extends Component {
                 <Home {...props}
                   handleLogoutClick={this.handleLogoutClick}
                 /> 
-              )}
+                )}
             />
         </BrowserRouter>
       </div>

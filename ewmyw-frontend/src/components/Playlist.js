@@ -109,3 +109,41 @@
 //   "#7700FF": 100
 // };
 // export default Playlist;
+
+import React, { Component } from 'react'
+
+class Playlist extends Component {
+
+    // state = {
+    //     favorites: []
+    // }
+
+    // componentDidMount() {
+    //     this.fetchFavorites();
+    // }
+
+    // fetchFavorites = async () => {
+    //     const response = await fetch("http://localhost:3000/api/v1/favorites");
+    //     const favorites = await response.json();
+    //     this.setState({ favorites })
+
+    //     console.log("response", response)
+    //     console.log("fav pod", favorites)
+    // }
+
+
+    render() {
+        if (!this.props.user) {
+            return ""
+        }
+        // debugger
+        return (
+            <div>
+                <h1> Hi {this.props.user.first_name} </h1>
+                <h1> Playlist </h1>
+            </div>
+        )
+    }
+}
+
+export default Playlist;

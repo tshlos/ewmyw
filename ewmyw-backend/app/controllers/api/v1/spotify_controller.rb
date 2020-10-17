@@ -43,10 +43,11 @@ class Api::V1::SpotifyController < ApplicationController
         else
             query = "type:show"
         end
+
         type = "show"
         market = "US"
-        offset = "20"
-        limit = "30"
+        offset = "0"
+        limit = "20"
         
         # RestClient.proxy = "http://localhost:8888"
         header = {
@@ -71,6 +72,7 @@ class Api::V1::SpotifyController < ApplicationController
             spotify_id = podcast["id"]
             
             pod = podcasts.find {|podcast| podcast.podcast_id == spotify_id} #object containing the podcast check if integer id matches string id
+            # byebug
             if pod
                 fav_pod = favorites.find {|favorite| favorite.podcast_id == pod.id }
                 if fav_pod
