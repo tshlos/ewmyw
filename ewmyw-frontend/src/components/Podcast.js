@@ -9,7 +9,7 @@ export default class Podcast extends Component {
         super()
         this.state = {
             isFavorite: props.podcast.is_favorite,
-            podcasts: []
+            podcasts: [],
         }
     }
 

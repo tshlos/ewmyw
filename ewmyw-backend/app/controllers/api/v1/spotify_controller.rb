@@ -43,12 +43,15 @@ class Api::V1::SpotifyController < ApplicationController
         else
             query = "type:show"
         end
-
+        # byebug
         type = "show"
         market = "US"
-        offset = "0"
-        limit = "20"
-        
+        limit = 20
+        page = params[:page].to_i
+        # byebug
+        offset = limit * page
+
+
         # RestClient.proxy = "http://localhost:8888"
         header = {
             Authorization: "Bearer " + self.get_token
