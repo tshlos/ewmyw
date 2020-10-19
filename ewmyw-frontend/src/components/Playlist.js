@@ -27,7 +27,6 @@ class Playlist extends Component {
 
         let favsToRender;
         if (this.state.favorites) {
-            // debugger
             favsToRender = this.state.favorites.shows.map((favs) => {
                 return (
                     <Podcast podcast={favs} />

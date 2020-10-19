@@ -7,8 +7,9 @@ import Navbar from './components/Navbar';
 import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Sidebar from './components/Sidebar';
+import DragnDrop from './components/DragnDrop';
 
 export default class App extends Component {
 
@@ -101,6 +102,7 @@ export default class App extends Component {
                 /> 
                 )}
             />
+            <DragnDrop path="/drag" component={DragnDrop} />
         </BrowserRouter>
       </div>
     )
