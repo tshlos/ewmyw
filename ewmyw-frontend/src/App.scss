@@ -246,6 +246,19 @@ li {
   position: relative;
 }
 
+/*PLAYLIST*/
+.favorites-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+}
+
+.playlist-title {
+  margin-top: 2em;
+  text-align: center;
+}
 
 
 /*Search Bar*/

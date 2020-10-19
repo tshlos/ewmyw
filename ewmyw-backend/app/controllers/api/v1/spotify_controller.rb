@@ -38,19 +38,18 @@ class Api::V1::SpotifyController < ApplicationController
 
 
     def spotify_search
+
         if !params[:query].blank?
             query = params[:query]
         else
             query = "type:show"
         end
-        # byebug
+
         type = "show"
         market = "US"
-        limit = 20
+        limit = 30
         page = params[:page].to_i
-        # byebug
         offset = limit * page
-
 
         # RestClient.proxy = "http://localhost:8888"
         header = {

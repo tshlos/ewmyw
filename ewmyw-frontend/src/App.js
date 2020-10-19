@@ -21,13 +21,10 @@ export default class App extends Component {
       mode: "cors"
     });
     const userLoggedIn = await resp.json();
-    console.log("user", userLoggedIn)
     this.setState({
       loggedInStatus: "logged in",
       user: userLoggedIn.user
     });
-    console.log('user logged in', userLoggedIn)
-    // debugger
   }
 
   componentDidMount() {
@@ -56,7 +53,6 @@ export default class App extends Component {
 
 
   render() {
-    // debugger
     return (
       <div>
         <BrowserRouter>
@@ -68,7 +64,6 @@ export default class App extends Component {
                 /> 
               )}
             />
-          {/* <Route path="/playlist" component={Playlist} /> */}
           <Route path="/playlist" 
             render={props => (
               <Playlist 
@@ -92,6 +87,7 @@ export default class App extends Component {
               render={props => (
                 <Home {...props}
                   handleLogoutClick={this.handleLogoutClick}
+                  user={this.state.user}
                 /> 
                 )}
             />

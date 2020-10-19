@@ -13,12 +13,10 @@ export default class Scroll extends Component {
 
     loadDefaultSearch = async () => {
         const pageNum = this.props.page
-        console.log("pageee", pageNum)
 
         const url = new URL("http://localhost:3000/api/v1/search");
         url.searchParams.append("page", pageNum);
 
-        
         const response = await fetch(url.toString(), {
             credentials: "include",
             mode: "cors"
@@ -27,41 +25,35 @@ export default class Scroll extends Component {
         this.setState({
             podcasts: podcasts
         });
-        console.log('search podcasts', podcasts)
-        // debugger
     }
 
     componentDidMount() {
         this.loadDefaultSearch();
-        // this.loadMorePodcasts();
-        // window.addEventListener('scroll', this.infiniteScroll);
-        // this.searchPodcasts(this.state.page);
     }
 
-    handleSearchChange = async (e) => {
-        e.preventDefault();
-        const url = new URL("http://localhost:3000/api/v1/search");
+    // handleSearchChange = async (e) => {
+    //     e.preventDefault();
+    //     const url = new URL("http://localhost:3000/api/v1/search");
 
-        url.searchParams.append("query", e.target.value);
-        url.searchParams.append("offset", 20);
-        // debugger
+    //     url.searchParams.append("query", e.target.value);
+    //     url.searchParams.append("offset", 20);
+    //     // debugger
 
-        const result = await fetch(url.toString(), {
-            credentials: "include",
-            mode: "cors"
-        });
-        const filteredPodcasts = await result.json()
-        this.setState({
-            podcasts: filteredPodcasts
-        });
-        // debugger
-    }
+    //     const result = await fetch(url.toString(), {
+    //         credentials: "include",
+    //         mode: "cors"
+    //     });
+    //     const filteredPodcasts = await result.json()
+    //     this.setState({
+    //         podcasts: filteredPodcasts
+    //     });
+    //     // debugger
+    // }
 
     render() {
 
         return (
             <div className="scroll-container">
-            
                 <div className="all-podcasts">
                     {this.state.podcasts.shows.items.map((podcast) => {
                         return (
@@ -73,6 +65,7 @@ export default class Scroll extends Component {
                     })}
                 </div>
             </div>
+
         )
     }
 }

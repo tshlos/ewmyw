@@ -13,45 +13,12 @@ export default class Home extends Component {
         pages: 1
     }
 
-    // searchPodcasts = async () => {
-    //     const response = await fetch("http://localhost:3000/api/v1/search", {
-    //         credentials: "include",
-    //         mode: "cors"
-    //     });
-    //     const podcasts = await response.json();
-    //     this.setState({
-    //         podcasts: podcasts
-    //     });
-    //     console.log('search podcasts', podcasts)
-    //     debugger
-    // }
-
-
-
-    // loadMorePodcasts = () => {
-    //     this.setState({ loading: true })
-    //     // console.log("load more podcasts", this.state.podcasts)
-    //     // debugger
-    //     this.setState({
-    //         morePodcasts: [...this.state.morePodcasts, ...this.state.podcasts.shows.items],
-    //         loading: false,
-    //     });
-    //     console.log('poooooooddss', this.state.morePodcasts)
-    //     // debugger
-    // }
-
-
-    // componentDidMount() {
-    //     this.searchPodcasts(this.state.page);
-    // }
-
 
     handleSearchChange = async (e) => {
         e.preventDefault();
         const url = new URL("http://localhost:3000/api/v1/search");
 
         url.searchParams.append("query", e.target.value);
-        // debugger
 
         const result = await fetch(url.toString(), {
             credentials: "include",
@@ -61,56 +28,53 @@ export default class Home extends Component {
         this.setState({
             podcasts: filteredPodcasts
         });
-        // debugger
     }
 
 
     handleLoadMore = () => {
-    
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
-            console.log("fetch more podcasts")
+        if (window.innerHeight + document.documentElement.scrollTop + 100 < document.documentElement.offsetHeight) {
             return;
         }
-    
+        console.log("fetch more podcasts")
+
         this.setState({
-            pages: this.state.pages + 1 
-        }); 
+            pages: this.state.pages + 1
+        });
     }
 
-    
+
     componentDidMount() {
         window.addEventListener("scroll", this.handleLoadMore);
         return () => window.removeEventListener("scroll", this.handleLoadMore);
     }
 
 
-    // handleScroll = () => {
-    //     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
-    //         console.log("fetch more podcasts")
-    //     }
-    // }
-
-
     render() {
+        console.log(this.props.user)
+        if (!this.props.user) {
+            return ""
+        }
+
         let num = this.state.pages;
         let arr = []
         for (let i = 0; i < num; i++) {
             arr.push(<Scroll page={i} />)
-            console.log(arr)
         }
-       
-        
+
         return (
+            <div>
+            <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5>
             <div className="search-container">
-                {/* <div> */}
-                <input
-                    className="search-input"
-                    type="text"
-                    placeholder="Search..."
-                    onChange={this.handleSearchChange}
-                />
-                {/* </div> */}
-                {/* <div className="all-podcasts">
+
+                <div>
+                    <input
+                        className="search-input"
+                        type="text"
+                        placeholder="Search..."
+                        onChange={this.handleSearchChange}
+                    />
+                </div>
+                <div className="all-podcasts">
                     {this.state.podcasts.shows.items.map((podcast) => {
                         return (
                             <Podcast
@@ -119,10 +83,9 @@ export default class Home extends Component {
                             />
                             )
                         })}
-                    </div> */}
-                {/* <Scroll page={this.state.pages} /> */}
+                    </div>
                 {arr}
-                {/* <button onClick={this.handleLoadMore} >Load more</button> */}
+            </div>
             </div>
         )
     }

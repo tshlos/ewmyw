@@ -42,10 +42,6 @@ export default class Login extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.handleSubmit();
-    // }
-
     render() {
         return (
             <div className="login-container">
