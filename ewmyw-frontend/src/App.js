@@ -8,11 +8,19 @@ import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Sidebar from './components/Sidebar';
 
 export default class App extends Component {
 
   state = {
-    loggedInStatus: "not logged in"
+    loggedInStatus: "not logged in",
+    expanded: false
+  }
+
+  toggleSidebar = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
   }
 
   handleSuccessfulAuth = async () => {
@@ -56,6 +64,7 @@ export default class App extends Component {
     return (
       <div>
         <BrowserRouter>
+        <Sidebar toggleSidebar={this.toggleSidebar} expanded={this.state.expanded}/>
           <Route path="/" 
               render={props => (
                 <Navbar {...props}
@@ -88,6 +97,7 @@ export default class App extends Component {
                 <Home {...props}
                   handleLogoutClick={this.handleLogoutClick}
                   user={this.state.user}
+                  expanded={this.state.expanded}
                 /> 
                 )}
             />

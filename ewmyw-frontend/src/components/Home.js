@@ -63,29 +63,50 @@ export default class Home extends Component {
 
         return (
             <div>
-            <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5>
-            <div className="search-container">
+                <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5>
+                <div className="search-container">
 
-                <div>
-                    <input
-                        className="search-input"
-                        type="text"
-                        placeholder="Search..."
-                        onChange={this.handleSearchChange}
-                    />
-                </div>
-                <div className="all-podcasts">
-                    {this.state.podcasts.shows.items.map((podcast) => {
-                        return (
-                            <Podcast
-                            key={podcast.id}
-                            podcast={podcast}
-                            />
+                    <div>
+                        <input
+                            className="search-input"
+                            type="text"
+                            placeholder="Search..."
+                            onChange={this.handleSearchChange}
+                        />
+                    </div>
+                    <div className="all-podcasts">
+                        {this.state.podcasts.shows.items.map((podcast) => {
+                            return (
+                                <Podcast
+                                    key={podcast.id}
+                                    podcast={podcast}
+                                />
                             )
                         })}
                     </div>
-                {arr}
-            </div>
+                    {arr}
+                </div>
+
+                <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
+                    {/* <header>
+                        <span></span>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </header> */}
+                    {/* <div className="container">
+                        <div className="module--full">
+                        </div>
+                        <div className="module-wrapper">
+                            <div className="module--half">
+                            </div>
+                            <div className="module--half">
+                            </div>
+                        </div>
+                    </div> */}
+                </section>
             </div>
         )
     }
