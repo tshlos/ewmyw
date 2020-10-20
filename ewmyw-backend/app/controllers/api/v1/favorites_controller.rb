@@ -34,6 +34,7 @@ class Api::V1::FavoritesController < ApplicationController
             :headers => header
         )
         response = JSON.parse(shows)
+        # byebug
         render json: response, except: shows["available_markets"]
 
         # render json: favorites

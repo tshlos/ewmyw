@@ -3,7 +3,9 @@ import Podcast from './Podcast';
 
 class Playlist extends Component {
 
-    state = {}
+    state = {
+        // favorites: null
+    }
 
     fetchFavorites = async () => {
         
@@ -12,14 +14,21 @@ class Playlist extends Component {
             mode: "cors"
         });
         const favorites = await response.json();
+         
 
+        if (!favorites.shows) {
+            if (this.state.favorites) {
+                this.setState({
+                    favorites: null
+                });
+            } 
+            return;
+        }
+        
+        
         if (!this.state.favorites || favorites.shows.length !== this.state.favorites.shows.length) {
             this.setState({ favorites })
-        }
-
-        // if (this.state.favorites && this.state.favorites.shows === "undefined") {
-        //     this.setState({ favorites})
-        // }
+        } 
     }
 
     componentDidUpdate() {
@@ -36,11 +45,10 @@ class Playlist extends Component {
         //     return ""
         // }
 
+        if (!this.state.favorites) {
+            return null;
+        }
         let favsToRender;
-        // if (!this.state.favorites && this.tate.favorites > 0) {
-        //     favsToRender = "Add favorites"
-        //     return
-        // }
         if (this.state.favorites) {
             favsToRender = this.state.favorites.shows.map((favs, index) => {
                 return (
@@ -54,6 +62,8 @@ class Playlist extends Component {
         } else {
             favsToRender = "Loading...";
         }
+
+
         return (
             <div>
                 <div className="playlist-title">

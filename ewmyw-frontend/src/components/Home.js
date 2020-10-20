@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import Podcast from "./Podcast";
 import Scroll from "./Scroll";
 import Sidebar from "./Sidebar";
 
@@ -15,19 +16,14 @@ class Home extends Component {
     }
 
     handleSearchChange = async (e) => {
+        // debugger
         e.preventDefault();
-        const url = new URL("http://localhost:3000/api/v1/search");
-
-        url.searchParams.append("query", e.target.value);
-
-        const result = await fetch(url.toString(), {
-            credentials: "include",
-            mode: "cors"
-        });
-        const filteredPodcasts = await result.json()
+    
         this.setState({
-            podcasts: filteredPodcasts
+            query: e.target.value,
+            pages: 1
         });
+        // debugger
     }
 
 
@@ -49,6 +45,7 @@ class Home extends Component {
 
     onDragEnd = async (result) => {
         // debugger
+        if(!result.destination) return;
         const id = result.draggableId;
         console.log('heeeeyyyy', result)
 
@@ -77,21 +74,6 @@ class Home extends Component {
     }
 
 
-    // onDragDelete = (result) => {
-    //     const id = result.draggableId;
-    //     console.log('deleteeee', result)
-
-    //     if (result.destination.droppableId === "home") {
-    //         this.setState({
-    //             isFavorite: !this.props.isFavorite
-    //         })
-    //         fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
-    //             method: "DELETE"
-    //         })
-    //     }
-    // }
-
-
     render() {
         // console.log(this.props.user)
         if (!this.props.user) {
@@ -101,7 +83,7 @@ class Home extends Component {
         let num = this.state.pages;
         let arr = []
         for (let i = 0; i < num; i++) {
-            arr.push(<Scroll page={i} key={i} />)
+            arr.push(<Scroll page={i} key={i} query={this.state.query} />)
         }
 
         return (
@@ -120,19 +102,9 @@ class Home extends Component {
                                     className="search-input"
                                     type="text"
                                     placeholder="Search..."
-                                    onChange={this.handleSearchChange}
+                                    onChange={(e) => this.handleSearchChange(e)}
                                 />
                             </div>
-                            {/* <div className="all-podcasts">
-                                {this.state.podcasts.shows.items.map((podcast) => {
-                                    return (
-                                        <Podcast
-                                            key={podcast.id}
-                                            podcast={podcast}
-                                        />
-                                    )
-                                })} */}
-                            {/* </div> */}
                           
                         </div>
                         <Droppable droppableId={"home"}>
@@ -148,12 +120,22 @@ class Home extends Component {
                                             }}
                                         >
                                             {provided.placeholder}
+                                                <div className="all-podcasts">
+                                                    {this.state.podcasts.shows.items.map((podcast, index) => {
+                                                        return (
+                                                            <Podcast
+                                                                key={podcast.id}
+                                                                podcast={podcast}
+                                                                index={1000+index}
+                                                            />
+                                                        )
+                                                    })}
+                                                </div>
                                             {arr}
                                         </div>
                                     )
                                 }}
                             </Droppable>
-
                         <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
                         </section>
                     </div>

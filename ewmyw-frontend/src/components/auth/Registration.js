@@ -88,7 +88,7 @@ export default class Registration extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        {this.state.isInvalid && <div> Email already taken </div>}
+                        {this.state.isInvalid && <div className="error-msg"> Email already taken </div>}
                         <div className="button">
                             <button className="btn" type="submit">Sign up</button>
                         </div>

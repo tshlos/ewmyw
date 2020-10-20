@@ -62,6 +62,8 @@
   position: relative;
   height: 40px;
   box-sizing: border-box;
+  border: none;
+  background-color: transparent;
 
   $border: 3px;
   color: black;
@@ -81,6 +83,14 @@
     background: linear-gradient(to right, #f8d90f, #fe7815);
   }
 }
+
+/*ERROR MESSAGES*/
+.error-msg {
+  color: tomato;
+  text-align: center;
+  padding-bottom: 1.5em;
+}
+
 
 /*NAVBAR*/
 .navbar {
@@ -105,7 +115,6 @@
   color: #69676A;
   text-decoration: none;
 }
-
 
 /* PODCASTS */
 $font-color: #A2A2A2;
@@ -238,6 +247,7 @@ $primary-color: #63B7E6;
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 5rem;
+  position: absolute;
 }
 
 .playlist-title {
@@ -396,13 +406,13 @@ $yellow: #EFB05A;
 
 $sidebar-width: 300px;
 
-main {
-  display: flex;
-  background: $faded-white;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
+// main {
+//   display: flex;
+//   background: $faded-white;
+//   width: 100%;
+//   height: 100%;
+//   position: relative;
+// }
 
 .sidebar {
   width: $sidebar-width;
@@ -507,7 +517,7 @@ main {
   transition: 400ms ease;
   
   &:nth-child(2) {
-    background: linear-gradient($orange 80%, transparent);
+    background: linear-gradient(blue 80%, transparent);
     margin-top: 70px;
     margin-left: 50px;
     transform: scale(.4) translateY(-400px);

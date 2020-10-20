@@ -11,20 +11,28 @@ class Scroll extends Component {
         },
     }
 
-    loadDefaultSearch = async () => {
+    loadDefaultSearch = async (query) => {
         const pageNum = this.props.page
+        
 
         const url = new URL("http://localhost:3000/api/v1/search");
         url.searchParams.append("page", pageNum);
+        url.searchParams.append("query", query || this.props.query);
+
 
         const response = await fetch(url.toString(), {
             credentials: "include",
             mode: "cors"
         });
         const podcasts = await response.json();
+
         this.setState({
             podcasts: podcasts
         });
+    }
+
+    componentWillReceiveProps(props) {
+        this.loadDefaultSearch(props.query);
     }
 
     componentDidMount() {
