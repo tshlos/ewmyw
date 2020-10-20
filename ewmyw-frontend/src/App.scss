@@ -110,12 +110,9 @@
 /* PODCASTS */
 $font-color: #A2A2A2;
 $primary-color: #63B7E6;
-#podcast {
-  // font-family: 'Raleway', sans-serif;
-  // padding: 50px 0;
+.podcast {
   background: #fff;
   text-align: center;
-  // word-wrap: break-word;
 
   .cards {
     display: flex;
@@ -124,15 +121,20 @@ $primary-color: #63B7E6;
   }
   .card-image {
     width: 80%;
+    margin-bottom: 1em;
   }
+
   .card-name {
     font-size: 25px;
-    margin-top: -30px;
+    margin-top: -20px;
     margin-bottom: .5em;
     font-family: 'Oswald', sans-serif;
   }
   .card {
     border: none;
+  }
+  .card-link {
+    margin-top: 1em;
   }
   .heart {
     margin-left: 12px;
@@ -146,9 +148,9 @@ $primary-color: #63B7E6;
     list-style: none;
     li {
       padding: 40px;
-      width: 350px;
+      width: 270px;
       transition: box-shadow .3s;
-      height: 500px;
+      height: 430px;
       margin-bottom: 2em;
 
       &:hover {
@@ -176,45 +178,50 @@ $primary-color: #63B7E6;
           position: static;
         }
       }
-
-      // h3 {
-      //   color: darken($font-color, 20%);
-      //   display: inline-block;
-      //   font-size: 24px;
-      //   font-weight: 100;
-      //   transition: color .3s;
-      //   &:after {
-      //     content: '';
-      //     position: relative;
-      //     left: 50%;
-      //     top: 20px;
-      //     transform: translateX(-50%);
-      //     display: block;
-      //     width: 40px;
-      //     height: 1px;
-      //     background: darken($font-color, 20%);
-      //     transition: width .3s;
-      //   }
-      // }
-      // p {
-      //   color: $font-color;
-      //   text-align: left;
-      //   text-indent: 1em;
-      //   font-size: 16px;
-      //   line-height: 26px;
-      //   transition: color .3s;
-      // }
     }
   }
 }
 
-.all-podcasts {
+.sidebar-container {
   display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 5rem;
+  font-size: 1.1em;
 }
+
+.card-image.sidebar-image {
+  width: 120px;
+
+}
+
+.sidebar-name-rotate {
+  transform: rotate(90deg);
+  position: absolute;
+  margin-top: 2em;
+
+}
+
+.sidebar-name {
+  text-align: center;
+}
+// .sidebar-display {
+//   display: flex;
+// }
+
+
+// .podcast.sidebar-podcast {
+//   position: relative;
+//   background: lightpink;
+//   float: left;
+//   border-radius: 5px;
+//   padding: 20px;
+// }
+
+// .all-podcasts {
+//   display: flex;
+//   justify-content: flex-start;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   margin-top: 5rem;
+// }
 
 
 /*Parallax Scrolling*/

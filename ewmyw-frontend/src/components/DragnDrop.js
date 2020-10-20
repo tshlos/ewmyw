@@ -61,7 +61,7 @@ function DragnDrop() {
     const [ columns, setColumns ] = useState(columnsFromBackend);
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", height: "100px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", height: "100px" }}>
             <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)} >
                 {Object.entries(columns).map(([id, column]) => {
                     return (
@@ -75,7 +75,7 @@ function DragnDrop() {
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                                 style={{
-                                                    background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
+                                                    // background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
                                                     padding: 4,
                                                     width: 250,
                                                     minHeight: 500
@@ -96,7 +96,7 @@ function DragnDrop() {
                                                                         padding: 16,
                                                                         margin: "0 0 8px 0",
                                                                         minHeight: "50px",
-                                                                        backgroundColor: snapshot.isDragging ? "#263B4A" : "#456C86",
+                                                                        // backgroundColor: snapshot.isDragging ? "#263B4A" : "#456C86",
                                                                         color: "white",
                                                                         ...provided.draggableProps.style
                                                                     }}

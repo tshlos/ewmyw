@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Podcast from "./Podcast";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Scroll from "./Scroll";
+import Sidebar from "./Sidebar";
 
-export default class Home extends Component {
+class Home extends Component {
 
     state = {
         podcasts: {
@@ -12,7 +13,6 @@ export default class Home extends Component {
         },
         pages: 1
     }
-
 
     handleSearchChange = async (e) => {
         e.preventDefault();
@@ -35,8 +35,6 @@ export default class Home extends Component {
         if (window.innerHeight + document.documentElement.scrollTop + 100 < document.documentElement.offsetHeight) {
             return;
         }
-        console.log("fetch more podcasts")
-
         this.setState({
             pages: this.state.pages + 1
         });
@@ -49,8 +47,53 @@ export default class Home extends Component {
     }
 
 
+    onDragEnd = async (result) => {
+        // debugger
+        const id = result.draggableId;
+        console.log('heeeeyyyy', result)
+
+        if (result.destination && result.destination.droppableId === "sidebar") {
+            const podcast = {
+                podcast_id: id
+            }
+            const response = await fetch("http://localhost:3000/api/v1/favorites", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(podcast)
+            });
+            const fav = await response.json();
+        } else {
+            await fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+        }
+        this.setState({
+            a: 1
+        });
+    }
+
+
+    // onDragDelete = (result) => {
+    //     const id = result.draggableId;
+    //     console.log('deleteeee', result)
+
+    //     if (result.destination.droppableId === "home") {
+    //         this.setState({
+    //             isFavorite: !this.props.isFavorite
+    //         })
+    //         fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
+    //             method: "DELETE"
+    //         })
+    //     }
+    // }
+
+
     render() {
-        console.log(this.props.user)
+        // console.log(this.props.user)
         if (!this.props.user) {
             return ""
         }
@@ -58,56 +101,65 @@ export default class Home extends Component {
         let num = this.state.pages;
         let arr = []
         for (let i = 0; i < num; i++) {
-            arr.push(<Scroll page={i} />)
+            arr.push(<Scroll page={i} key={i} />)
         }
 
         return (
             <div>
-                <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5>
-                <div className="search-container">
+                <DragDropContext 
+                    onDragEnd={result => this.onDragEnd(result)} 
 
+                >
+                    <Sidebar a={this.state.a} />
                     <div>
-                        <input
-                            className="search-input"
-                            type="text"
-                            placeholder="Search..."
-                            onChange={this.handleSearchChange}
-                        />
-                    </div>
-                    <div className="all-podcasts">
-                        {this.state.podcasts.shows.items.map((podcast) => {
-                            return (
-                                <Podcast
-                                    key={podcast.id}
-                                    podcast={podcast}
-                                />
-                            )
-                        })}
-                    </div>
-                    {arr}
-                </div>
+                        <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5>
+                        <div className="search-container">
 
-                <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
-                    {/* <header>
-                        <span></span>
-                        <ul>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </header> */}
-                    {/* <div className="container">
-                        <div className="module--full">
-                        </div>
-                        <div className="module-wrapper">
-                            <div className="module--half">
+                            <div>
+                                <input
+                                    className="search-input"
+                                    type="text"
+                                    placeholder="Search..."
+                                    onChange={this.handleSearchChange}
+                                />
                             </div>
-                            <div className="module--half">
-                            </div>
+                            {/* <div className="all-podcasts">
+                                {this.state.podcasts.shows.items.map((podcast) => {
+                                    return (
+                                        <Podcast
+                                            key={podcast.id}
+                                            podcast={podcast}
+                                        />
+                                    )
+                                })} */}
+                            {/* </div> */}
+                          
                         </div>
-                    </div> */}
-                </section>
+                        <Droppable droppableId={"home"}>
+                                {(provided, snapshot) => {
+                                    return (
+                                        <div
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef}
+                                            style={{
+                                                // background: snapshot.isDraggingOver ? "white" : "white",
+                                                padding: 4,
+                                                minHeight: 500
+                                            }}
+                                        >
+                                            {provided.placeholder}
+                                            {arr}
+                                        </div>
+                                    )
+                                }}
+                            </Droppable>
+
+                        <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
+                        </section>
+                    </div>
+                </DragDropContext>
             </div>
         )
     }
 }
+export default Home;

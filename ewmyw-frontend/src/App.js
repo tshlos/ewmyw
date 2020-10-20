@@ -8,20 +8,11 @@ import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import Sidebar from './components/Sidebar';
-import DragnDrop from './components/DragnDrop';
 
-export default class App extends Component {
+class App extends Component {
 
   state = {
     loggedInStatus: "not logged in",
-    expanded: false
-  }
-
-  toggleSidebar = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
   }
 
   handleSuccessfulAuth = async () => {
@@ -65,46 +56,41 @@ export default class App extends Component {
     return (
       <div>
         <BrowserRouter>
-        <Sidebar toggleSidebar={this.toggleSidebar} expanded={this.state.expanded}/>
-          <Route path="/" 
-              render={props => (
-                <Navbar {...props}
-                  handleLogoutClick={this.handleLogoutClick}
-                  user={this.state.user}
-                /> 
-              )}
+        <Navbar 
+          handleLogoutClick={this.handleLogoutClick}
+          user={this.state.user}
+        /> 
+        <Route path="/playlist" 
+          render={props => (
+            <Playlist 
+              user={this.state.user}
             />
-          <Route path="/playlist" 
+          )}
+        />
+        <Route path="/podcasts" component={Podcasts}/>
+        <Route 
+          path="/login" 
+          render={(props) => (
+            <Login 
+              {...props}
+              handleLogoutClick={this.handleLogoutClick}
+            />
+          )} 
+        />
+        <Route 
+          path="/signup" component={Registration} />
+          <Route exact path="/" 
             render={props => (
-              <Playlist 
-                user={this.state.user}
-              />
-            )}
-          />
-          <Route path="/podcasts" component={Podcasts}/>
-          <Route 
-            path="/login" 
-            render={(props) => (
-              <Login 
-                {...props}
+              <Home {...props}
                 handleLogoutClick={this.handleLogoutClick}
-              />
-            )} 
+                user={this.state.user}
+              /> 
+              )}
           />
-          <Route 
-            path="/signup" component={Registration} />
-            <Route exact path="/" 
-              render={props => (
-                <Home {...props}
-                  handleLogoutClick={this.handleLogoutClick}
-                  user={this.state.user}
-                  expanded={this.state.expanded}
-                /> 
-                )}
-            />
-            <DragnDrop path="/drag" component={DragnDrop} />
-        </BrowserRouter>
-      </div>
+          {/* <DragnDrop exact path="/drag" component={DragnDrop} /> */}
+      </BrowserRouter>
+    </div>
     )
   }
 }
+export default App; 

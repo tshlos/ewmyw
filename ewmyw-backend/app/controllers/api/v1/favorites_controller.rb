@@ -19,7 +19,7 @@ class Api::V1::FavoritesController < ApplicationController
     
 
     def index
-        favorites = Favorite.includes(:podcast).where(user_id: 2)
+        favorites = Favorite.includes(:podcast).where(user_id: @current_user.id)
         favorites_array = favorites.map { |fav| fav.podcast } 
         spotify_ids = favorites_array.map { |id| id.podcast_id }
         ids = spotify_ids.join(",")
@@ -53,9 +53,9 @@ class Api::V1::FavoritesController < ApplicationController
         if !podcast 
             podcast = Podcast.create(podcast_id: params[:podcast_id])
         end
-        
-        favorite = Favorite.find_by(podcast_id: podcast.id);
         # byebug
+        
+        favorite = Favorite.find_by(podcast_id: podcast.id)
         if !favorite 
             Favorite.create!(
                 user_id: @current_user.id,
