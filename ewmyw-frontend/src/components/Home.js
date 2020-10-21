@@ -3,6 +3,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Podcast from "./Podcast";
 import Scroll from "./Scroll";
 import Sidebar from "./Sidebar";
+import Video from "./Video";
 
 class Home extends Component {
 
@@ -16,26 +17,24 @@ class Home extends Component {
     }
 
     handleSearchChange = async (e) => {
-        // debugger
         e.preventDefault();
-    
+
         this.setState({
             query: e.target.value,
             pages: 1
         });
-        // debugger
     }
 
-
     handleLoadMore = () => {
-        if (window.innerHeight + document.documentElement.scrollTop + 100 < document.documentElement.offsetHeight) {
+        console.log(window.innerHeight, document.documentElement.scrollTop, document.documentElement.offsetHeight)
+        if (window.innerHeight + document.documentElement.scrollTop + 1000 < document.documentElement.offsetHeight) {
             return;
         }
+        console.log("LOAD")
         this.setState({
             pages: this.state.pages + 1
         });
     }
-
 
     componentDidMount() {
         window.addEventListener("scroll", this.handleLoadMore);
@@ -44,10 +43,8 @@ class Home extends Component {
 
 
     onDragEnd = async (result) => {
-        // debugger
-        if(!result.destination) return;
+        if (!result.destination) return;
         const id = result.draggableId;
-        console.log('heeeeyyyy', result)
 
         if (result.destination && result.destination.droppableId === "sidebar") {
             const podcast = {
@@ -75,9 +72,8 @@ class Home extends Component {
 
 
     render() {
-        // console.log(this.props.user)
         if (!this.props.user) {
-            return ""
+            return "";
         }
 
         let num = this.state.pages;
@@ -88,15 +84,14 @@ class Home extends Component {
 
         return (
             <div>
-                <DragDropContext 
-                    onDragEnd={result => this.onDragEnd(result)} 
-
+                <DragDropContext
+                    onDragEnd={result => this.onDragEnd(result)}
                 >
+                    {/* <Video /> */}
                     <Sidebar a={this.state.a} />
                     <div>
-                        <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5>
+                        {/* <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5> */}
                         <div className="search-container">
-
                             <div>
                                 <input
                                     className="search-input"
@@ -105,37 +100,36 @@ class Home extends Component {
                                     onChange={(e) => this.handleSearchChange(e)}
                                 />
                             </div>
-                          
                         </div>
                         <Droppable droppableId={"home"}>
-                                {(provided, snapshot) => {
-                                    return (
-                                        <div
-                                            {...provided.droppableProps}
-                                            ref={provided.innerRef}
-                                            style={{
-                                                // background: snapshot.isDraggingOver ? "white" : "white",
-                                                padding: 4,
-                                                minHeight: 500
-                                            }}
-                                        >
-                                            {provided.placeholder}
-                                                <div className="all-podcasts">
-                                                    {this.state.podcasts.shows.items.map((podcast, index) => {
-                                                        return (
-                                                            <Podcast
-                                                                key={podcast.id}
-                                                                podcast={podcast}
-                                                                index={1000+index}
-                                                            />
-                                                        )
-                                                    })}
-                                                </div>
-                                            {arr}
+                            {(provided, snapshot) => {
+                                return (
+                                    <div
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                        style={{
+                                            // background: snapshot.isDraggingOver ? "white" : "white",
+                                            padding: 4,
+                                            minHeight: 500
+                                        }}
+                                    >
+                                        {provided.placeholder}
+                                        <div className="all-podcasts">
+                                            {this.state.podcasts.shows.items.map((podcast, index) => {
+                                                return (
+                                                    <Podcast
+                                                        key={podcast.id}
+                                                        podcast={podcast}
+                                                        index={1000 + index}
+                                                    />
+                                                )
+                                            })}
                                         </div>
-                                    )
-                                }}
-                            </Droppable>
+                                        {arr}
+                                    </div>
+                                )
+                            }}
+                        </Droppable>
                         <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
                         </section>
                     </div>

@@ -85,6 +85,9 @@ class Podcast extends Component {
                                             <div className="sidebar-card-name">
                                                 {name}
                                             </div>
+                                            <div className="card-link sidebar-cardlink"> 
+                                                <a href={external_urls["spotify"]}> Listen to Podcast </a>
+                                            </div>
                                             <img className="card-image sidebar-image" src={images[0].url} />
                                         </div>
                                     ) : ( <div className="cards">

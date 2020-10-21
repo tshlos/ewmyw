@@ -47,7 +47,7 @@ class Api::V1::SpotifyController < ApplicationController
 
         type = "show"
         market = "US"
-        limit = 30
+        limit = 20
         page = params[:page].to_i
         offset = limit * page
 

@@ -13,22 +13,31 @@ class Scroll extends Component {
 
     loadDefaultSearch = async (query) => {
         const pageNum = this.props.page
+        if (!query) {
+            query = this.props.query
+        };
+        if (query === this.state.query && pageNum === this.state.pageNum) {
+            return;
+        }
+        console.log("queeery", query)
         
-
         const url = new URL("http://localhost:3000/api/v1/search");
         url.searchParams.append("page", pageNum);
-        url.searchParams.append("query", query || this.props.query);
-
-
+        if (query) {
+            url.searchParams.append("query", query);
+        }
+        
         const response = await fetch(url.toString(), {
             credentials: "include",
             mode: "cors"
         });
+    
         const podcasts = await response.json();
-
         this.setState({
-            podcasts: podcasts
-        });
+            podcasts: podcasts,
+            pageNum: pageNum,
+            query: query
+        });    
     }
 
     componentWillReceiveProps(props) {
@@ -39,8 +48,7 @@ class Scroll extends Component {
         this.loadDefaultSearch();
     }
 
-    render() {
-
+    render() { 
         return (
             <div className="scroll-container">
                 <div className="all-podcasts">

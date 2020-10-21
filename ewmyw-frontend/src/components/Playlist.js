@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
+import { FaTruckLoading } from 'react-icons/fa';
 import Podcast from './Podcast';
 
 class Playlist extends Component {
 
-    state = {
-        // favorites: null
-    }
+    state = {}
 
     fetchFavorites = async () => {
         
@@ -14,7 +13,6 @@ class Playlist extends Component {
             mode: "cors"
         });
         const favorites = await response.json();
-         
 
         if (!favorites.shows) {
             if (this.state.favorites) {
@@ -24,8 +22,6 @@ class Playlist extends Component {
             } 
             return;
         }
-        
-        
         if (!this.state.favorites || favorites.shows.length !== this.state.favorites.shows.length) {
             this.setState({ favorites })
         } 
@@ -39,7 +35,7 @@ class Playlist extends Component {
         this.fetchFavorites();
     }
 
-    render() { console.log('favsssss?', this.state.favorites)
+    render() {
         
         // if (!this.props.user) {
         //     return ""
@@ -62,7 +58,6 @@ class Playlist extends Component {
         } else {
             favsToRender = "Loading...";
         }
-
 
         return (
             <div>

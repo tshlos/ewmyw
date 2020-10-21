@@ -60,7 +60,8 @@ class App extends Component {
           handleLogoutClick={this.handleLogoutClick}
           user={this.state.user}
         /> 
-        <Route path="/playlist" 
+        {/* <Route path="/playlist" component={Playlist}/> */}
+        <Route path="/playlist"
           render={props => (
             <Playlist 
               user={this.state.user}

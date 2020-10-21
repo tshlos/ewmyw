@@ -94,33 +94,38 @@
 
 /*NAVBAR*/
 .navbar {
-  // box-sizing: border-box;
-  background-color: black;
-  // margin: 0;
-  // padding: 0;
-  height: 8vh;
   position: relative;
   display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // margin-left: auto;
   font-size: 17px
 }
 .navbar a {
   text-decoration: none;
-  color: white;
+  text-shadow: 2px 2px #ffda05;
+
+  color: black;
   padding: 1em;
 }
 .navbar a:hover {
-  color: #69676A;
+  color: #4ABDAC;
   text-decoration: none;
 }
+.navbar-username {
+  padding-left: 10px;
+}
+
 
 /* PODCASTS */
+
+.all-podcasts {
+  padding-top: 2em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  // grid-gap: .5rem;
+}
+
 $font-color: #A2A2A2;
 $primary-color: #63B7E6;
 .podcast {
-  background: #fff;
   text-align: center;
 
   .cards {
@@ -138,12 +143,20 @@ $primary-color: #63B7E6;
     margin-top: -20px;
     margin-bottom: .5em;
     font-family: 'Oswald', sans-serif;
+    color: white;
   }
   .card {
     border: none;
+    // background: rgba(46, 74, 45, .3)
+  }
+  .card-description {
+    line-height: 1.4em;
   }
   .card-link {
     margin-top: 1em;
+  }
+  .card-link a {
+    color: #63B7E6;
   }
   .heart {
     margin-left: 12px;
@@ -191,6 +204,10 @@ $primary-color: #63B7E6;
   }
 }
 
+.sidebar-display {
+  display: table-caption;
+}
+
 .sidebar-container {
   display: flex;
   font-size: 1.1em;
@@ -198,7 +215,6 @@ $primary-color: #63B7E6;
 
 .card-image.sidebar-image {
   width: 120px;
-
 }
 
 .sidebar-name-rotate {
@@ -210,6 +226,10 @@ $primary-color: #63B7E6;
 
 .sidebar-name {
   text-align: center;
+}
+
+.card-description {
+  color: white;
 }
 // .sidebar-display {
 //   display: flex;
@@ -268,6 +288,17 @@ $primary-color: #63B7E6;
   margin-top: 100px;
   width: 300px;
   height: 50px;
+  background: none;
+  border: 0;
+  font-size: 1.5em;
+  border-bottom: 1px solid;
+  outline: none;
+  color: #999;
+}
+
+.search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #888;
+  opacity: 1; /* Firefox */
 }
 
 
@@ -404,6 +435,14 @@ $faded-white: #FAFAFC;
 $dark-grey: #E5E5E7;
 $yellow: #EFB05A;
 
+$grey: #332f2d;
+$faded-grey: #595350;
+
+$yellow2: #fcdb1c;
+
+
+
+
 $sidebar-width: 300px;
 
 // main {
@@ -417,8 +456,9 @@ $sidebar-width: 300px;
 .sidebar {
   width: $sidebar-width;
   background-image: linear-gradient(
-    $orange,
-    $pink
+    $yellow,
+    $yellow2
+
   );
   background-size: 200%;
   background-position: 0 100%;
@@ -550,4 +590,12 @@ $sidebar-width: 300px;
     top: 500px;
     left: -100px;
   }
+}
+
+
+/*SCROLL*/
+.scroll-container {
+  width: 50px;
+  display: flex;
+
 }
