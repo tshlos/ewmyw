@@ -2,7 +2,7 @@ import React from 'react'
 // import VideoFile from "./video/paint.mp4";
 // import VideoFile from "./video/blue2.mp4";
 // import VideoFile from "./video/pod.mp4";
-// import VideoFile from "./video/studio.mp4";
+// import VideoFile from "./video/sunflower.mp4";
 
 export default function Video() {
     return (
@@ -20,7 +20,7 @@ export default function Video() {
                     objectFit: "cover",
                     transform: "translate(-50%, -50%)",
                     zIndex: "-1",
-                    filter: "blur(10px) grayscale(100%)"
+                    // filter: "blur(3px) grayscale(100%)"
                 }}
             >
                 {/* <source src={VideoFile} type="video/mp4" /> */}

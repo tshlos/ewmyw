@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import ParallaxEffect from "./ParallaxEffect";
 import Podcast from "./Podcast";
 import Scroll from "./Scroll";
 import Sidebar from "./Sidebar";
@@ -87,6 +88,7 @@ class Home extends Component {
                 <DragDropContext
                     onDragEnd={result => this.onDragEnd(result)}
                 >
+                    <ParallaxEffect />
                     {/* <Video /> */}
                     <Sidebar a={this.state.a} />
                     <div>
