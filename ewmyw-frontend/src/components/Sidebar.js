@@ -19,7 +19,8 @@ class Sidebar extends Component {
       <div>
         <span className="shape"></span>
         <div className={this.state.expanded ? "sidebar sidebar--expanded" : "sidebar"} onClick={this.toggleSidebar} >
-          {!this.state.expanded ? <h2 className="sidebar-name-rotate">Playlist</h2> : <h2 className="sidebar-name">Playlist</h2>}
+          <h2 className={!this.state.expanded ? "sidebar-name-rotate" : "sidebar-name"}><span>Playlist</span></h2>
+
           <span className="shape"></span>
           <Droppable droppableId={"sidebar"}>
             {(provided, snapshot) => {

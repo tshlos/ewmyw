@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Parallax } from "react-parallax";
 import ParallaxEffect from "./ParallaxEffect";
 import Podcast from "./Podcast";
 import Scroll from "./Scroll";
@@ -88,21 +89,20 @@ class Home extends Component {
                 <DragDropContext
                     onDragEnd={result => this.onDragEnd(result)}
                 >
-                    <ParallaxEffect />
-                    {/* <Video /> */}
-                    <Sidebar a={this.state.a} />
-                    <div>
-                        {/* <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5> */}
-                        <div className="search-container">
-                            <div>
-                                <input
-                                    className="search-input"
-                                    type="text"
-                                    placeholder="Search..."
-                                    onChange={(e) => this.handleSearchChange(e)}
-                                />
-                            </div>
+                    <div className="search-container">
+                        <div>
+                            <input
+                                className="search-input"
+                                type="text"
+                                placeholder="Search..."
+                                onChange={(e) => this.handleSearchChange(e)}
+                            />
                         </div>
+                    </div>
+                    <ParallaxEffect />
+                    <Sidebar a={this.state.a} />
+                    <div className="droppable-container">
+                        {/* <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5> */}
                         <Droppable droppableId={"home"}>
                             {(provided, snapshot) => {
                                 return (

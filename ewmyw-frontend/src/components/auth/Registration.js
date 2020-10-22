@@ -54,7 +54,6 @@ export default class Registration extends Component {
         return (
             <div className="signup-container">
                 <div id="signup-form-wrapper">
-                    {/* <h2> Sign Up </h2> */}
                     <form onSubmit={this.handleSubmit}>
                         <input
                             type="first_name"

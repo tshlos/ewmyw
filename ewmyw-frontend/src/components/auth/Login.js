@@ -46,7 +46,6 @@ export default class Login extends Component {
         return (
             <div className="login-container">
                 <div id="login-form-wrapper" >
-                    {/* <h2> Login </h2>           */}
                     <form onSubmit={this.handleSubmit}>
                         <input
                             type="email"
@@ -64,7 +63,7 @@ export default class Login extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        {this.state.isInvalid && <div> Invalid username or password </div>}
+                        {this.state.isInvalid && <div className="error-msg"> Invalid password </div>}
                         <div className="button">
                             <button className="btn" type="submit">Login</button>
                         </div>

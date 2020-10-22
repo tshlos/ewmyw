@@ -36,11 +36,6 @@ class Playlist extends Component {
     }
 
     render() {
-        
-        // if (!this.props.user) {
-        //     return ""
-        // }
-
         if (!this.state.favorites) {
             return null;
         }
@@ -61,9 +56,6 @@ class Playlist extends Component {
 
         return (
             <div>
-                <div className="playlist-title">
-                    {/* <h3>{this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)}'s Playlist </h3> */}
-                </div>
                 <div className="favorites-container"> 
                     {favsToRender}
                 </div>
