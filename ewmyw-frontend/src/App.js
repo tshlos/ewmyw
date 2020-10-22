@@ -7,11 +7,12 @@ import Navbar from './components/Navbar';
 import Playlist from './components/Playlist';
 import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class App extends Component {
+class App extends Component {
 
   state = {
-    loggedInStatus: "not logged in"
+    loggedInStatus: "not logged in",
   }
 
   handleSuccessfulAuth = async () => {
@@ -20,18 +21,15 @@ export default class App extends Component {
       mode: "cors"
     });
     const userLoggedIn = await resp.json();
-    console.log("user", userLoggedIn)
     this.setState({
       loggedInStatus: "logged in",
       user: userLoggedIn.user
     });
   }
 
-
   componentDidMount() {
     this.handleSuccessfulAuth();
   }
-
 
   handleLogoutClick = async (event) => {
     event.preventDefault();
@@ -58,41 +56,42 @@ export default class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Route path="/" 
-              render={props => (
-                <Navbar {...props}
-                  handleLogoutClick={this.handleLogoutClick}
-                  user={this.state.user}
-                /> 
-              )}
+        <Navbar 
+          handleLogoutClick={this.handleLogoutClick}
+          user={this.state.user}
+        /> 
+        {/* <Route path="/playlist" component={Playlist}/> */}
+        <Route path="/playlist"
+          render={props => (
+            <Playlist 
+              user={this.state.user}
             />
-          <Route path="/playlist" component={Playlist} />
-          {/* <Route path="/podcasts" component={Podcasts}/> */}
-          <Route path="/podcasts" 
-            render={props => 
-              <Podcasts user={this.state.user} />
-            }
-          />
-          <Route 
-            path="/login" 
-            render={(props) => (
-              <Login 
-                {...props}
+          )}
+        />
+        <Route path="/podcasts" component={Podcasts}/>
+        <Route 
+          path="/login" 
+          render={(props) => (
+            <Login 
+              {...props}
+              handleLogoutClick={this.handleLogoutClick}
+            />
+          )} 
+        />
+        <Route 
+          path="/signup" component={Registration} />
+          <Route exact path="/" 
+            render={props => (
+              <Home {...props}
                 handleLogoutClick={this.handleLogoutClick}
-              />
-            )} 
-          />
-          <Route 
-            path="/signup" component={Registration} />
-            <Route exact path="/" 
-              render={props => (
-                <Home {...props}
-                  handleLogoutClick={this.handleLogoutClick}
-                /> 
+                user={this.state.user}
+              /> 
               )}
-            />
-        </BrowserRouter>
-      </div>
+          />
+          {/* <DragnDrop exact path="/drag" component={DragnDrop} /> */}
+      </BrowserRouter>
+    </div>
     )
   }
 }
+export default App; 

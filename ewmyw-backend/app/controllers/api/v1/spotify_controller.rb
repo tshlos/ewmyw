@@ -38,16 +38,19 @@ class Api::V1::SpotifyController < ApplicationController
 
 
     def spotify_search
+
         if !params[:query].blank?
             query = params[:query]
         else
             query = "type:show"
         end
+
         type = "show"
         market = "US"
-        offset = "20"
-        limit = "30"
-        
+        limit = 20
+        page = params[:page].to_i
+        offset = limit * page
+
         # RestClient.proxy = "http://localhost:8888"
         header = {
             Authorization: "Bearer " + self.get_token
@@ -71,6 +74,7 @@ class Api::V1::SpotifyController < ApplicationController
             spotify_id = podcast["id"]
             
             pod = podcasts.find {|podcast| podcast.podcast_id == spotify_id} #object containing the podcast check if integer id matches string id
+            # byebug
             if pod
                 fav_pod = favorites.find {|favorite| favorite.podcast_id == pod.id }
                 if fav_pod

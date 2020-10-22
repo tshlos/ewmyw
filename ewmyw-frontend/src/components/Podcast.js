@@ -1,26 +1,28 @@
 import React, { Component } from "react";
-import { FaHeart } from "react-icons/fa";
+import { Draggable } from "react-beautiful-dnd";
+import { FaHeart, FaPlayCircle, FaMusic } from "react-icons/fa";
+// import { FaHeart } from "react-icons/fa";
+import Home from "./Home";
 
 
-export default class Podcast extends Component {
+class Podcast extends Component {
 
     constructor(props) {
         super()
         this.state = {
             isFavorite: props.podcast.is_favorite,
-            podcasts: []
         }
     }
-
 
     addPodcastToFavorite = () => {
         this.setState({
             isFavorite: !this.state.isFavorite
         });
+        // debugger
         const id = this.props.podcast.id;
+        console.log("iddddd", id)
         this.fetchToAddLike(id);
     }
-
 
     fetchToAddLike = async (podcastId) => {
         const podcast = {
@@ -52,77 +54,80 @@ export default class Podcast extends Component {
 
 
     render() {
+
         const { name, description, external_urls, images, publisher, total_episodes, category, id } = this.props.podcast;
 
         return (
-            <div>
-                <div className="container">
-                    <div className="card">
-                        <div className="podcast-image">
-                            <img className="card-image" src={images[0].url} />
-                        </div>
-                        <div className="card-text">
-                            <div className="card-info">
-                                <h2> {name} </h2>
-                                <FaHeart
-                                    onClick={() => this.state.isFavorite ? this.removeLike() : this.addPodcastToFavorite()}
-                                    size={25}
-                                    color={this.state.isFavorite ? "#ff3232" : "#c3c6c1"}
-                                />
+            <div className="card-container">
+                <Home isFavorite={this.state.isFavorite} />
+                <Draggable key={id} draggableId={id} index={this.props.index}>
+                    {(provided, snapshot) => {
+                        return (
+                            <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                    userSelect: "none",
+                                    padding: 16,
+                                    margin: "0 0 8px 0",
+                                    minHeight: "50px",
+                                    // backgroundColor: snapshot.isDragging ? "white" : "#456C86",
+                                    // color: "black",
+                                    ...provided.draggableProps.style
+                                }}
+                            >
+                                <div className="podcast sidebar-podcast">
+                                    <div className="sidebar-display">
+                                        {this.props.isSmall ? (
+                                            <div className="sidebar-container">
+                                                <div className="sidebar-card-name">
+                                                    {name.length > 40 ? name.substring(0, 40) + "..." : name}
+                                                    <div className="sidebar-card-link">
+                                                        <a href={external_urls["spotify"]} target="_blank">
+                                                            <FaMusic className="play-icon"/>  
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <img className="sidebar-card-image" src={images[0].url} />
+                                            </div>
+                                        ) : (
+                                        <div class="cards-container">
+                                            <div class="cards">
+                                                <div class="card-image-container">
+                                                    <img className="card-image" src={images[0].url} />
+                                                </div>
+                                                <div class="card-info">
+                                                    <div class="info-container">
+                                                        <div class="heart">
+                                                            <FaHeart
+                                                                onClick={() => this.state.isFavorite ? this.removeLike() : this.addPodcastToFavorite()}
+                                                                size={25}
+                                                                color={this.state.isFavorite ? "#ff3232" : "#c3c6c1"}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="card-title">{name}</div>
+                                                        <div className="card-description">{description.length > 200 ? description.substring(0, 180) + "..." : description}</div>
+                                                    </div>
+
+                                                    <a href={external_urls["spotify"]} target="_blank">
+                                                        <FaMusic className="play-icon"/>  
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
-                            <div className="separator"></div>
-                            <h5 className="podcast-description"> {description.substr(0, 600)} </h5>
-                            <div>
-                                {/* <a href={external_urls["spotify"]}> Listen to Podcast </a> */}
-                                <h5 className="podcast-publisher"> {publisher} </h5>
-                                <h6 className="podcast-eps"> {total_episodes} episodes </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        )
+                    }}
+                </Draggable>
             </div>
         )
-
-        // return (
-            // <div className="container">
-            //     <div className="blog-card">
-            //         {/* <img className="pod-image" src={images[0].url} /> */}
-            //         <div className="pod-details">
-            //             {/* <h3 className="pod-title"> {name} </h3> */}
-            //             <p className="pod-description"> </p>
-            //         </div>
-            //     </div>
-            // </div>
-
-
-            // <div className="container">
-        
-            //     <main>
-            //     <div class="banner">
-            //         <img src="https://cdn.pixabay.com/photo/2017/02/01/09/45/fan-palm-2029202_1280.png" alt="banner" class="banner__img" />
-            //     </div>
-            //     <div class="text">
-            //         <h1>California</h1>
-            //         <p class="text__sub">36.77° N, 119.42° W </p>
-            //         <p class="text__p">a state in the Pacific Region of the United States of America. With 39.5 million residents across a total area of about 163,696 square miles, California is the most populous U.S. state and the third-largest by area. </p>
-            //     </div>
-
-         
-            //     </main>
-
-            // </div>
-
-            // <div className="row">
-            //     <div className="column">
-            //         <div className="card">
-            //             <h3>{name}</h3> 
-            //         </div>
-            //     </div>
-
-            // </div> 
-
-
-        // )
-
     }
 }
+export default Podcast;
+

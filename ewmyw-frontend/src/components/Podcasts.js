@@ -3,7 +3,7 @@ import Home from "./Home";
 import Podcast from "./Podcast";
 
 
-export default class Podcasts extends Component {
+class Podcasts extends Component {
 
     state = {
         defaultPodcasts: {
@@ -28,15 +28,20 @@ export default class Podcasts extends Component {
             <div>
                 {this.state.defaultPodcasts.shows.map((podcast) => {
                     return (
-                        <Podcast 
-                            key={podcast.id} 
-                            podcast={podcast}
-                            user={this.props.user}
-                        />
+                        <div> 
+                            <Podcast 
+                                key={podcast.id} 
+                                podcast={podcast}
+                            />
+                            <Home
+                                podcast={podcast}
+                            />
+                        </div>
                     )
                 })}
             </div>
         )
     }
 }
+export default Podcasts;
 

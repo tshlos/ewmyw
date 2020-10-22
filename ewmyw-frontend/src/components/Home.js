@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Parallax } from "react-parallax";
+import ParallaxEffect from "./ParallaxEffect";
 import Podcast from "./Podcast";
+import Scroll from "./Scroll";
+import Sidebar from "./Sidebar";
+import Video from "./Video";
 
-export default class Home extends Component {
+class Home extends Component {
 
     state = {
         podcasts: {
@@ -9,218 +15,129 @@ export default class Home extends Component {
                 items: []
             }
         },
+        pages: 1
     }
 
-    searchPodcasts = async () => {
-        const response = await fetch("http://localhost:3000/api/v1/search", {
-            credentials: "include",
-            mode: "cors"
-        });
-        const podcasts = await response.json();
-        // debugger
+    handleSearchChange = async (e) => {
+        e.preventDefault();
+
         this.setState({
-            podcasts: podcasts
+            query: e.target.value,
+            pages: 1
+        });
+    }
+
+    handleLoadMore = () => {
+        console.log(window.innerHeight, document.documentElement.scrollTop, document.documentElement.offsetHeight)
+        if (window.innerHeight + document.documentElement.scrollTop + 1000 < document.documentElement.offsetHeight) {
+            return;
+        }
+        console.log("LOAD")
+        this.setState({
+            pages: this.state.pages + 1
         });
     }
 
     componentDidMount() {
-        this.searchPodcasts();
+        window.addEventListener("scroll", this.handleLoadMore);
+        return () => window.removeEventListener("scroll", this.handleLoadMore);
     }
 
-    handleSearchChange = async (e) => {
-        const search = e.target.value;
-        // debugger
-        e.preventDefault();
-        const url = new URL("http://localhost:3000/api/v1/search");
-        url.searchParams.append("query", e.target.value);
-        const result = await fetch(url.toString(), {
-            credentials: "include",
-            mode: "cors"
-        });
-        const filteredPodcasts = await result.json()
+
+    onDragEnd = async (result) => {
+        if (!result.destination) return;
+        const id = result.draggableId;
+
+        if (result.destination && result.destination.droppableId === "sidebar") {
+            const podcast = {
+                podcast_id: id
+            }
+            const response = await fetch("http://localhost:3000/api/v1/favorites", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(podcast)
+            });
+            const fav = await response.json();
+        } else {
+            await fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+        }
         this.setState({
-            podcasts: filteredPodcasts
+            a: 1
         });
     }
 
 
     render() {
+        if (!this.props.user) {
+            return "";
+        }
+
+        let num = this.state.pages;
+        let arr = []
+        for (let i = 0; i < num; i++) {
+            arr.push(<Scroll page={i} key={i} query={this.state.query} />)
+        }
+
         return (
             <div>
-                <div className="search-container">
-                    <input
-                        className="search-input"
-                        type="text"
-                        placeholder="Search..."
-                        onChange={this.handleSearchChange}
-                    />
-                    <div className="search"> </div>
-                </div>
-
-                {this.state.podcasts.shows.items.map((podcast) => {
-                    return (
-                        <Podcast
-                            key={podcast.id}
-                            podcast={podcast}
-                        />
-                    )
-                })}
+                <DragDropContext
+                    onDragEnd={result => this.onDragEnd(result)}
+                >
+                    <div className="search-container">
+                        <div>
+                            <input
+                                className="search-input"
+                                type="text"
+                                placeholder="Search..."
+                                onChange={(e) => this.handleSearchChange(e)}
+                            />
+                        </div>
+                    </div>
+                    <ParallaxEffect />
+                    <Sidebar a={this.state.a} />
+                    <div className="droppable-container">
+                        {/* <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5> */}
+                        <Droppable droppableId={"home"}>
+                            {(provided, snapshot) => {
+                                return (
+                                    <div
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                        style={{
+                                            // background: snapshot.isDraggingOver ? "white" : "white",
+                                            padding: 4,
+                                            minHeight: 500
+                                        }}
+                                    >
+                                        {provided.placeholder}
+                                        <div className="all-podcasts">
+                                            {this.state.podcasts.shows.items.map((podcast, index) => {
+                                                return (
+                                                    <Podcast
+                                                        key={podcast.id}
+                                                        podcast={podcast}
+                                                        index={1000 + index}
+                                                    />
+                                                )
+                                            })}
+                                        </div>
+                                        {arr}
+                                    </div>
+                                )
+                            }}
+                        </Droppable>
+                        <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
+                        </section>
+                    </div>
+                </DragDropContext>
             </div>
-
-            // <div className="wrapper"> 
-            //     <div>
-            //         <input 
-            //             className="search-field"
-            //             // type="text" 
-            //             type="search"
-            //             placeholder="Find Podcasts"
-            //             onChange={this.handleChange}
-            //             // onChange={this.filteredPodcasts}
-            //         />
-            //         <button className="search"> Search </button>
-            //     </div>
-
-            //     <div>
-            //         {this.state.podcasts.shows.items.map((podcast) => {
-            //             return (
-            //                 <PodcastCollection 
-            //                     key={podcast.id} 
-            //                     podcast={podcast} 
-            //                 />
-            //             )
-            //         })}
-            //     </div>
-            // </div>
-
-
         )
     }
 }
-
-
-
-
-// import React, { Component } from "react";
-// import Podcast from "./Podcast";
-
-// export default class Home extends Component {
-
-//     state = {
-//         podcasts: {
-//             shows: {
-//                 items: []
-//             }
-//         },
-//         defaultPodcasts: {
-//             shows: []
-//         }
-//     }
-
-//     getPodcasts = async () => {
-//         const response = await fetch("http://localhost:3000/api/v1/podcasts");
-//         const podcasts = await response.json()
-//         this.setState({
-//             defaultPodcasts: podcasts
-//         });
-
-//         console.log("fukkkkkknnn", podcasts)
-//     }
-
-//     searchPodcasts = async () => {
-//         const response = await fetch("http://localhost:3000/api/v1/search", {
-//             credentials: "include",
-//             mode: "cors"
-//         });
-//         const podcasts = await response.json();
-//         // debugger
-//         this.setState({
-//             podcasts: podcasts
-//         });
-//     }
-
-//     componentDidMount() {
-//         this.searchPodcasts();
-//         this.getPodcasts();
-
-//     }
-
-//     handleSearchChange = async (e) => {
-//         const search = e.target.value;
-//         // debugger
-//         e.preventDefault();
-//         const url = new URL("http://localhost:3000/api/v1/search");
-//         url.searchParams.append("query", e.target.value);
-//         const result = await fetch(url.toString(), {
-//             credentials: "include",
-//             mode: "cors"
-//         });
-
-//         const filteredPodcasts = await result.json()
-//         this.setState({
-//             podcasts: filteredPodcasts
-//         });
-//     }
-
-
-//     render() {
-//         return (
-//             <div>
-//                 <div className="search-container">
-//                     <input
-//                         className="search-input"
-//                         type="text"
-//                         placeholder="Search..."
-//                         onChange={this.handleSearchChange}
-//                     />
-//                     <div className="search"> </div>
-//                 </div>
-
-//                 {this.state.defaultPodcasts.shows.map((podcast) => {
-//                     return (
-//                         <Podcast
-//                             key={podcast.id}
-//                             podcast={podcast}
-//                             user={this.props.user}
-//                         />
-//                     )
-//                 })}
-
-//                 {this.state.podcasts.shows.items.map((podcast) => {
-//                     return (
-//                         <Podcast
-//                             key={podcast.id}
-//                             podcast={podcast}
-//                         />
-//                     )
-//                 })}
-//             </div>
-
-//             // <div className="wrapper"> 
-//             //     <div>
-//             //         <input 
-//             //             className="search-field"
-//             //             // type="text" 
-//             //             type="search"
-//             //             placeholder="Find Podcasts"
-//             //             onChange={this.handleChange}
-//             //             // onChange={this.filteredPodcasts}
-//             //         />
-//             //         <button className="search"> Search </button>
-//             //     </div>
-
-//             //     <div>
-//             //         {this.state.podcasts.shows.items.map((podcast) => {
-//             //             return (
-//             //                 <PodcastCollection 
-//             //                     key={podcast.id} 
-//             //                     podcast={podcast} 
-//             //                 />
-//             //             )
-//             //         })}
-//             //     </div>
-//             // </div>
-
-
-//         )
-//     }
-// }
+export default Home;
