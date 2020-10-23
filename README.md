@@ -28,14 +28,13 @@ EWMYW is a podcast discoverability app.
 
 ## Demo
 ### Login
-![Login Demo](https://gph.is/g/4DBb5MP)
+![Login Demo](https://media.giphy.com/media/WfsSKpnQnvc7nVzn04/giphy.gif)
 
 ###Search Feature
-![Search Feature](https://gph.is/g/4Mz52lB)
+![Search Feature](https://media.giphy.com/media/yvXSaotfF6l5m2DF9x/giphy.gif)
 
-![Infinite Scroll](https://gph.is/g/aXk52xV)
+![Infinite Scroll](https://media.giphy.com/media/Q0TAz7k7KqnOs1l6nu/giphy.gif)
 
 ###Like/Delete Feature
-![Like Feature](https://gph.is/g/EG7b2W1)
-![!Delete Feature](https://gph.is/g/4bd52JL)
+![Like Feature](https://media.giphy.com/media/HPF604n1W5lYISdWDn/giphy.gif)
 ![Delete Feature](https://media.giphy.com/media/3f6HlDrauZsHyZ9rEg/giphy.gif)
