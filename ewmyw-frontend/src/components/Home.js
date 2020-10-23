@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { Parallax } from "react-parallax";
 import ParallaxEffect from "./ParallaxEffect";
 import Podcast from "./Podcast";
 import Scroll from "./Scroll";
 import Sidebar from "./Sidebar";
-import Video from "./Video";
 
 class Home extends Component {
 
@@ -28,11 +26,10 @@ class Home extends Component {
     }
 
     handleLoadMore = () => {
-        console.log(window.innerHeight, document.documentElement.scrollTop, document.documentElement.offsetHeight)
+        console.log("inner", window.innerHeight, "second", document.documentElement.scrollTop, "third", document.documentElement.offsetHeight)
         if (window.innerHeight + document.documentElement.scrollTop + 1000 < document.documentElement.offsetHeight) {
             return;
         }
-        console.log("LOAD")
         this.setState({
             pages: this.state.pages + 1
         });
@@ -86,9 +83,7 @@ class Home extends Component {
 
         return (
             <div>
-                <DragDropContext
-                    onDragEnd={result => this.onDragEnd(result)}
-                >
+                <DragDropContext onDragEnd={result => this.onDragEnd(result)} >
                     <div className="search-container">
                         <div>
                             <input
@@ -102,15 +97,13 @@ class Home extends Component {
                     <ParallaxEffect />
                     <Sidebar a={this.state.a} />
                     <div className="droppable-container">
-                        {/* <h5> Hi {this.props.user.first_name.charAt(0).toUpperCase() + this.props.user.first_name.slice(1)} </h5> */}
                         <Droppable droppableId={"home"}>
-                            {(provided, snapshot) => {
+                            {(provided) => {
                                 return (
                                     <div
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
                                         style={{
-                                            // background: snapshot.isDraggingOver ? "white" : "white",
                                             padding: 4,
                                             minHeight: 500
                                         }}
@@ -132,8 +125,7 @@ class Home extends Component {
                                 )
                             }}
                         </Droppable>
-                        <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}>
-                        </section>
+                        <section className={this.props.expanded ? "main-content main-content--expanded" : "main-content"}> </section>
                     </div>
                 </DragDropContext>
             </div>

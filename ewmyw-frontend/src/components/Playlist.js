@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { FaTruckLoading } from 'react-icons/fa';
 import Podcast from './Podcast';
 
 class Playlist extends Component {
@@ -7,7 +6,7 @@ class Playlist extends Component {
     state = {}
 
     fetchFavorites = async () => {
-        
+
         const response = await fetch("http://localhost:3000/api/v1/favorites", {
             credentials: "include",
             mode: "cors"
@@ -19,12 +18,12 @@ class Playlist extends Component {
                 this.setState({
                     favorites: null
                 });
-            } 
+            }
             return;
         }
         if (!this.state.favorites || favorites.shows.length !== this.state.favorites.shows.length) {
             this.setState({ favorites })
-        } 
+        }
     }
 
     componentDidUpdate() {
@@ -43,7 +42,7 @@ class Playlist extends Component {
         if (this.state.favorites) {
             favsToRender = this.state.favorites.shows.map((favs, index) => {
                 return (
-                    <Podcast 
+                    <Podcast
                         index={index}
                         podcast={favs}
                         isSmall={true}
@@ -56,7 +55,7 @@ class Playlist extends Component {
 
         return (
             <div>
-                <div className="favorites-container"> 
+                <div className="favorites-container">
                     {favsToRender}
                 </div>
             </div>

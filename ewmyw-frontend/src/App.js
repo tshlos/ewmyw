@@ -4,10 +4,7 @@ import './App.scss';
 import Home from './components/Home';
 import Login from './components/auth/Login';
 import Navbar from './components/Navbar';
-import Playlist from './components/Playlist';
-import Podcasts from './components/Podcasts';
 import Registration from './components/auth/Registration';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
@@ -60,15 +57,6 @@ class App extends Component {
           handleLogoutClick={this.handleLogoutClick}
           user={this.state.user}
         /> 
-        {/* <Route path="/playlist" component={Playlist}/> */}
-        <Route path="/playlist"
-          render={props => (
-            <Playlist 
-              user={this.state.user}
-            />
-          )}
-        />
-        <Route path="/podcasts" component={Podcasts}/>
         <Route 
           path="/login" 
           render={(props) => (
@@ -79,16 +67,16 @@ class App extends Component {
           )} 
         />
         <Route 
-          path="/signup" component={Registration} />
-          <Route exact path="/" 
-            render={props => (
-              <Home {...props}
-                handleLogoutClick={this.handleLogoutClick}
-                user={this.state.user}
-              /> 
-              )}
-          />
-          {/* <DragnDrop exact path="/drag" component={DragnDrop} /> */}
+          path="/signup" component={Registration} 
+        />
+        <Route exact path="/" 
+          render={props => (
+            <Home {...props}
+              handleLogoutClick={this.handleLogoutClick}
+              user={this.state.user}
+            /> 
+            )}
+        />
       </BrowserRouter>
     </div>
     )

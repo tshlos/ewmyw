@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { FaHeart, FaPlayCircle, FaMusic } from "react-icons/fa";
-// import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaMusic } from "react-icons/fa";
 import Home from "./Home";
 
 
@@ -18,9 +17,7 @@ class Podcast extends Component {
         this.setState({
             isFavorite: !this.state.isFavorite
         });
-        // debugger
         const id = this.props.podcast.id;
-        console.log("iddddd", id)
         this.fetchToAddLike(id);
     }
 
@@ -53,15 +50,13 @@ class Podcast extends Component {
     }
 
 
-    render() {
-
-        const { name, description, external_urls, images, publisher, total_episodes, category, id } = this.props.podcast;
-
+    render() { console.log("isSmall", this.props.isSmall)
+        const { name, description, external_urls, images, publisher, total_episodes, id } = this.props.podcast;
         return (
             <div className="card-container">
                 <Home isFavorite={this.state.isFavorite} />
                 <Draggable key={id} draggableId={id} index={this.props.index}>
-                    {(provided, snapshot) => {
+                    {(provided) => {
                         return (
                             <div
                                 ref={provided.innerRef}
@@ -72,8 +67,6 @@ class Podcast extends Component {
                                     padding: 16,
                                     margin: "0 0 8px 0",
                                     minHeight: "50px",
-                                    // backgroundColor: snapshot.isDragging ? "white" : "#456C86",
-                                    // color: "black",
                                     ...provided.draggableProps.style
                                 }}
                             >
@@ -85,39 +78,43 @@ class Podcast extends Component {
                                                     {name.length > 40 ? name.substring(0, 40) + "..." : name}
                                                     <div className="sidebar-card-link">
                                                         <a href={external_urls["spotify"]} target="_blank">
-                                                            <FaMusic className="play-icon"/>  
+                                                            <FaMusic className="icon-play"/>  
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <img className="sidebar-card-image" src={images[0].url} />
                                             </div>
                                         ) : (
-                                        <div class="cards-container">
-                                            <div class="cards">
-                                                <div class="card-image-container">
-                                                    <img className="card-image" src={images[0].url} />
-                                                </div>
-                                                <div class="card-info">
-                                                    <div class="info-container">
-                                                        <div class="heart">
-                                                            <FaHeart
-                                                                onClick={() => this.state.isFavorite ? this.removeLike() : this.addPodcastToFavorite()}
-                                                                size={25}
-                                                                color={this.state.isFavorite ? "#ff3232" : "#c3c6c1"}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="card-title">{name}</div>
-                                                        <div className="card-description">{description.length > 200 ? description.substring(0, 180) + "..." : description}</div>
-                                                    </div>
 
-                                                    <a href={external_urls["spotify"]} target="_blank">
-                                                        <FaMusic className="play-icon"/>  
-                                                    </a>
+                                            <div className="cards-container">
+                                                <div className="cards">
+                                                    <div className="card-image-container">
+                                                        <img className="card-image" src={images[0].url} />
+                                                    </div>
+                                                    <div className="card-info">
+                                                        <div className="info-container">
+                                                            <div className="icon-heart">
+                                                                <FaHeart
+                                                                    onClick={() => this.state.isFavorite ? this.removeLike() : this.addPodcastToFavorite()}
+                                                                    size={25}
+                                                                    color={this.state.isFavorite ? "#ff3232" : "#c3c6c1"}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="card-title">{name} </div>
+                                                            <div className="card-description">{description.length > 200 ? description.substring(0, 180) + "..." : description}</div>
+                                                        </div>
+                                                        <a href={external_urls["spotify"]} target="_blank">
+                                                            <FaMusic className="icon-play"/>  
+                                                        </a>
+                                                        <div className="card-publ-eps">
+                                                            <div className="card-publisher"> {publisher} </div> 
+                                                            <div className="card-episodes"> {total_episodes} episodes </div> 
+                                                        </div>
+                                                   </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         )}
                                     </div>
                                 </div>
