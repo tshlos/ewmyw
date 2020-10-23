@@ -8,7 +8,7 @@ EWMYW is a podcast discoverability app.
 1. Fork and clone the repository. 
 2. Navigate to the directory where you cloned the repository. 
 3. cd into the backend and run:
-  - $ bundle install
+  - `$ bundle install`
   - $ rails db migrate
   - $ rails s
  4. cd into the fronend and run:
