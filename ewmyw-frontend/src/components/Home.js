@@ -26,7 +26,6 @@ class Home extends Component {
     }
 
     handleLoadMore = () => {
-        console.log("inner", window.innerHeight, "second", document.documentElement.scrollTop, "third", document.documentElement.offsetHeight)
         if (window.innerHeight + document.documentElement.scrollTop + 1000 < document.documentElement.offsetHeight) {
             return;
         }
@@ -39,7 +38,6 @@ class Home extends Component {
         window.addEventListener("scroll", this.handleLoadMore);
         return () => window.removeEventListener("scroll", this.handleLoadMore);
     }
-
 
     onDragEnd = async (result) => {
         if (!result.destination) return;

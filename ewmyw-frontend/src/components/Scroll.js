@@ -19,7 +19,6 @@ class Scroll extends Component {
         if (query === this.state.query && pageNum === this.state.pageNum) {
             return;
         }
-        console.log("queeery", query)
         
         const url = new URL("http://localhost:3000/api/v1/search");
         url.searchParams.append("page", pageNum);

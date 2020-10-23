@@ -17,7 +17,6 @@ class Api::V1::FavoritesController < ApplicationController
         JSON.parse(token)["access_token"]
     end
     
-
     def index
         favorites = Favorite.includes(:podcast).where(user_id: @current_user.id)
         favorites_array = favorites.map { |fav| fav.podcast } 
@@ -34,10 +33,7 @@ class Api::V1::FavoritesController < ApplicationController
             :headers => header
         )
         response = JSON.parse(shows)
-        # byebug
         render json: response, except: shows["available_markets"]
-
-        # render json: favorites
     end
 
     def show
@@ -54,7 +50,6 @@ class Api::V1::FavoritesController < ApplicationController
         if !podcast 
             podcast = Podcast.create(podcast_id: params[:podcast_id])
         end
-        # byebug
         
         favorite = Favorite.find_by(podcast_id: podcast.id)
         if !favorite 
@@ -73,7 +68,6 @@ class Api::V1::FavoritesController < ApplicationController
     end
 
     private
-    
     def favorite_params
         params.require(:favorite).permit(:id, :podcast_id, :user_id)
     end

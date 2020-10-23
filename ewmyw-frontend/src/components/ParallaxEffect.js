@@ -14,7 +14,7 @@ class ParallaxEffect extends Component {
                     zIndex: "-1",
                     height: "800px"
                 }}>
-                <Parallax bgImage={Map} strength={300} >
+                <Parallax bgImage={Map} strength={500} >
                     <div style={{ height: "800px" }}></div>
                 </Parallax>
             </div>

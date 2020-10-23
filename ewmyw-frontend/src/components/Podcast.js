@@ -36,7 +36,6 @@ class Podcast extends Component {
         const podInfo = await response.json();
     }
 
-
     removeLike = () => {
         const id = this.props.podcast.favorite_id;
         if (this.state.isFavorite) {
@@ -50,7 +49,7 @@ class Podcast extends Component {
     }
 
 
-    render() { console.log("isSmall", this.props.isSmall)
+    render() {
         const { name, description, external_urls, images, publisher, total_episodes, id } = this.props.podcast;
         return (
             <div className="card-container">

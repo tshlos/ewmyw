@@ -10,7 +10,6 @@ class Api::V1::SessionsController < ApplicationController
             render json: {
                 status: :created,
                 logged_in: true,
-                # user: user
                 user: UserSerializer.new(user)
             }
         else
@@ -18,12 +17,10 @@ class Api::V1::SessionsController < ApplicationController
         end
       end 
 
-
       def logged_in?
         if @current_user
             render json: {
                 logged_in: true,
-                # user: @current_user
                 user: UserSerializer.new(@current_user)
             }
         else
@@ -33,7 +30,6 @@ class Api::V1::SessionsController < ApplicationController
         end
       end
     
-      
       def logout
         reset_session
         render json: { 
