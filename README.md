@@ -21,7 +21,7 @@ EWMYW is a podcast discoverability app.
   
 2. Search
   - Look up podcasts based on title or category.
-  - 3. Infinite Scroll implemented to continuously load data as the scroll gets closer to the bottom of the page.
+  - Infinite Scroll implemented to continuously load data as the scroll gets closer to the bottom of the page.
  
 3. Add/Delete to Playlist
   - Add/delete podcast from playlist with drag and drop feature.
