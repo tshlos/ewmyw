@@ -9,11 +9,11 @@ EWMYW is a podcast discoverability app.
 2. Navigate to the directory where you cloned the repository. 
 3. cd into the backend and run:
   - `$ bundle install`
-  - $ rails db migrate
-  - $ rails s
+  - `$ rails db migrate`
+  - `$ rails s`
  4. cd into the fronend and run:
-  - $ npm install
-  - $ npm start
+  - `$ npm install`
+  - `$ npm start`
 
 ## Features
 ### 1. Sign Up/Login
