@@ -1,4 +1,4 @@
-# ewmyw
+# EWMYW
 
 ## Description
 
@@ -38,3 +38,4 @@ EWMYW is a podcast discoverability app.
 ###Like/Delete Feature
 ![Like Feature](https://gph.is/g/EG7b2W1)
 ![!Delete Feature](https://gph.is/g/4bd52JL)
+![Delete Feature](https://media.giphy.com/media/3f6HlDrauZsHyZ9rEg/giphy.gif)
