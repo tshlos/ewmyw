@@ -32,7 +32,6 @@ EWMYW is a podcast discoverability app.
 
 ### Search Feature
 ![Search Feature](https://media.giphy.com/media/yvXSaotfF6l5m2DF9x/giphy.gif)
-
 ![Infinite Scroll](https://media.giphy.com/media/Q0TAz7k7KqnOs1l6nu/giphy.gif)
 
 ### Like/Delete Feature
