@@ -6,12 +6,15 @@ EWMYW is a podcast discoverability app.
 
 ## Installation
 1. Fork and clone the repository. 
-2. Navigate to the directory where you cloned the repository. 
-3. cd into the backend and run:
+2. Get a Client ID and Client Secret from Spotify and add the following keys:
+- client_id: "Your Client ID here"
+- client_secret: "Your Client Secret here"
+3. Navigate to the directory where you cloned the repository. 
+4. cd into the backend and run:
   - `$ bundle install`
   - `$ rails db migrate`
   - `$ rails s`
- 4. cd into the fronend and run:
+ 5. cd into the fronend and run:
   - `$ npm install`
   - `$ npm start`
 
