@@ -6,7 +6,7 @@ EWMYW is a podcast discoverability app.
 
 ## Installation
 1. Fork and clone the repository. 
-2. Get a Client ID and Client Secret from Spotify and add the following keys:
+2. Get a Client ID and Client Secret from Spotify and include the following:
 - client_id: "Your Client ID here"
 - client_secret: "Your Client Secret here"
 3. Navigate to the directory where you cloned the repository. 
