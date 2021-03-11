@@ -233,12 +233,12 @@
   padding-bottom: 10px;
   padding-left: 10px;
 }
-.search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.search-input::placeholder {
   color: rgba(199, 199, 199, 0.74);
   font-size: 1.2em;
   font-family: sans-serif;  
   letter-spacing: 1px;
-  opacity: 1; /* Firefox */
+  opacity: 1;
 }
 
 /*SIDEBAR PLAYLIST*/
@@ -393,4 +393,8 @@ $lavender: #BD6AD8;
 .scroll-container {
   display: flex;
   justify-content: center;
+}
+
+.home-unauth {
+  margin-top: 300px;
 }

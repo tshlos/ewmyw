@@ -55,7 +55,7 @@ class App extends Component {
         <BrowserRouter>
         <Navbar 
           handleLogoutClick={this.handleLogoutClick}
-          user={this.state.user}
+          user={this.state.user} 
         /> 
         <Route 
           path="/login" 
@@ -73,9 +73,9 @@ class App extends Component {
           render={props => (
             <Home {...props}
               handleLogoutClick={this.handleLogoutClick}
-              user={this.state.user}
+              user={this.state.user} 
             /> 
-            )}
+          )}
         />
       </BrowserRouter>
     </div>

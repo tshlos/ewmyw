@@ -6,14 +6,16 @@ class ParallaxEffect extends Component {
 
     render() {
         return (
-            <div style={{
+            <div
+                style={{
                     position: "relative",
                     transform: "translate(0, -50%)",
                     objectFit: "cover",
                     overflow: "hidden",
                     zIndex: "-1",
                     height: "800px"
-                }}>
+                }}
+            >
                 <Parallax bgImage={Map} strength={500} >
                     <div style={{ height: "800px" }}></div>
                 </Parallax>

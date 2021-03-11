@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Home from "./Home";
 import Podcast from "./Podcast";
 
-
 class Podcasts extends Component {
 
     state = {

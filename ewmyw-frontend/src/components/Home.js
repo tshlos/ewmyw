@@ -18,7 +18,6 @@ class Home extends Component {
 
     handleSearchChange = async (e) => {
         e.preventDefault();
-
         this.setState({
             query: e.target.value,
             pages: 1
@@ -67,14 +66,13 @@ class Home extends Component {
         });
     }
 
-
     render() {
         if (!this.props.user) {
             return "";
         }
 
         let num = this.state.pages;
-        let arr = []
+        let arr = [];
         for (let i = 0; i < num; i++) {
             arr.push(<Scroll page={i} key={i} query={this.state.query} />)
         }

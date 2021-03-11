@@ -77,7 +77,7 @@ class Podcast extends Component {
                                                     {name.length > 40 ? name.substring(0, 40) + "..." : name}
                                                     <div className="sidebar-card-link">
                                                         <a href={external_urls["spotify"]} target="_blank">
-                                                            <FaMusic className="icon-play"/>  
+                                                            <FaMusic className="icon-play" />
                                                         </a>
                                                     </div>
                                                 </div>
@@ -105,13 +105,13 @@ class Podcast extends Component {
                                                             <div className="card-description">{description.length > 200 ? description.substring(0, 180) + "..." : description}</div>
                                                         </div>
                                                         <a href={external_urls["spotify"]} target="_blank">
-                                                            <FaMusic className="icon-play"/>  
+                                                            <FaMusic className="icon-play" />
                                                         </a>
                                                         <div className="card-publ-eps">
-                                                            <div className="card-publisher"> {publisher} </div> 
-                                                            <div className="card-episodes"> {total_episodes} episodes </div> 
+                                                            <div className="card-publisher"> {publisher} </div>
+                                                            <div className="card-episodes"> {total_episodes} episodes </div>
                                                         </div>
-                                                   </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )}

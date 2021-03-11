@@ -3,7 +3,7 @@ import Podcast from './Podcast';
 
 class Playlist extends Component {
 
-    state = {}
+    state = {};
 
     fetchFavorites = async () => {
         const response = await fetch("http://localhost:3000/api/v1/favorites", {
