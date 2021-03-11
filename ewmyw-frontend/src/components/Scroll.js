@@ -8,18 +8,17 @@ class Scroll extends Component {
             shows: {
                 items: []
             }
-        },
+        }
     }
 
     loadDefaultSearch = async (query) => {
-        const pageNum = this.props.page
+        const pageNum = this.props.page;
         if (!query) {
-            query = this.props.query
+            query = this.props.query;
         };
         if (query === this.state.query && pageNum === this.state.pageNum) {
             return;
         }
-        console.log("queeery", query)
         
         const url = new URL("http://localhost:3000/api/v1/search");
         url.searchParams.append("page", pageNum);

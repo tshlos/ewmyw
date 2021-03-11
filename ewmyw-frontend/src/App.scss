@@ -59,11 +59,6 @@
   outline: none; 
   color: #ABB2B9;
 }
-// .login-form::placeholder {
-//   color: #ABB2B9;
-//   font-size: 20px;
-
-// }
 .btn {
   background-color: transparent;
   border: none;
@@ -82,7 +77,6 @@
   background-color:#152238;
 
   $border: 3px;
-  // color: white;
   background-clip: padding-box; 
   border: solid $border transparent;
   border-radius: 2em;
@@ -94,8 +88,6 @@
     z-index: -1;
     margin: -$border;
     border-radius: inherit;
-    // background: linear-gradient(to right, red, orange);
-    // background: linear-gradient(to right, #f8d90f, #fe7815);
     background: linear-gradient(to right, #FCBD78, #fe7815);
   }
 }
@@ -107,7 +99,6 @@
   padding-bottom: 1.5em;
 }
 
-
 /*NAVBAR*/
 .navbar {
   position: relative;
@@ -116,7 +107,6 @@
 }
 .navbar a {
   text-decoration: none;
-  // text-shadow: 1px 1px white;
   color: white;
   padding: 1em;
 }
@@ -141,16 +131,12 @@
   font-size: 20px;
 }
 
-
-/* PODCASTS */
+/* PODCASTS HOME PAGE*/
 .droppable-container {
   margin-top: -300px;
 }
-
 .cards-container {
   align-items: center;
-  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  // transition: 0.3s;
 }
 .cards {
   color: #CD96A2;
@@ -165,30 +151,25 @@
 }
 .cards:hover {
   background: rgba(35, 77, 118, .3)
-  // border: 1px navy solid;
 }
 .card-title {
   letter-spacing: 1px;
   font-size: 1.5em;
   margin: 10px 0;
-  // color: lightsalmon;
   color: #C46354;
 }
 .card-image-container {
   background-color: transparent;
-  // background: rgba(35, 77, 118, .3);
 	padding: 30px;
 	max-width: 250px;
 }
 .card-image {
   width: 200px;
-  // width: 80%;
 }
 .card-info {
 	padding: 30px;
 	position: relative;
   width: 100%;
-  // color: black;
 }
 .card-description {
   font-family: 'News Cycle', sans-serif; 
@@ -202,30 +183,44 @@
 	text-align: right;
   width: 150px;
 }
-.play-icon {
+.icon-play {
   size: 30px;
   cursor: pointer;
   color: #BE959E;
 }
-.play-icon:hover {
+.icon-heart {
+  cursor: pointer;
+}
+.icon-play:hover {
   color: pink;
 }
 .card-image {
   margin-top: 1em;;
   width: 150px;
 }
+.card-publ-eps {
+  display: flex;
+  padding-top: 15px;
+}
+.card-publisher {
+  padding-right: 50px;
+  font-size: 15px;
+  color: #CABCA1;
+}
+.card-episodes {
+  padding-left: 50px;
+  font-size: 15px;
+  color: #CABCA1;
+}
 
-
-/*Search Bar*/
+/*SEARCH BAR*/
 .search-container {
   display: block;
   margin: auto;
   text-align: center;
   margin-top: 150px;
 }
-
 .search-input {
-  // font-family: 'Montserrat', sans-serif;
   margin-top: 100px;
   width: 300px;
   height: 50px;
@@ -238,15 +233,13 @@
   padding-bottom: 10px;
   padding-left: 10px;
 }
-.search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  //color: white;
+.search-input::placeholder {
   color: rgba(199, 199, 199, 0.74);
   font-size: 1.2em;
   font-family: sans-serif;  
   letter-spacing: 1px;
-  opacity: 1; /* Firefox */
+  opacity: 1;
 }
-
 
 /*SIDEBAR PLAYLIST*/
 .favorites-container {
@@ -254,7 +247,6 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   margin-top: 2em;
-  // position: absolute;
 }
 .sidebar-container {
   display: flex;
@@ -274,7 +266,14 @@
 .sidebar-name-rotate {
   transform: rotate(90deg);
   position: absolute;
-  margin-top: 3em;
+  margin-top: 4em;
+  border: 1px white solid;
+  padding: 15px;
+}
+.sidebar-name-rotate:hover {
+  color: #FD563D;
+  background: linear-gradient(to right, #f5c087, #f58a3df5);
+  border: 1px #FD563D solid;
 }
 .sidebar-name {
   text-align: center;
@@ -282,8 +281,12 @@
 .sidebar-card-link {
   margin-top: 1em;
 }
-
-
+.sidebar-playlist-text {
+  color: #ADADAD;
+  opacity: .6;
+  text-align: center;
+  font-style: italic;
+}
 
 /*SIDEBAR POPUP*/
 $pink: #FF65C3;
@@ -301,12 +304,6 @@ $lavender: #BD6AD8;
 
 .sidebar {
   width: $sidebar-width;
-  // background-color: linear-gradient(
-  // #FFDACB,  
-  // #FFBA2F 40%,
-
-  // );
-
   background-size: 200%;
   background-position: 0 100%;
   position: fixed;
@@ -320,7 +317,6 @@ $lavender: #BD6AD8;
   cursor: pointer;
   top: 70%;
   color: white;
-  // border: 1px #1DB3DD solid;
   
   &--expanded {
     background-size: 100%;
@@ -397,4 +393,8 @@ $lavender: #BD6AD8;
 .scroll-container {
   display: flex;
   justify-content: center;
+}
+
+.home-unauth {
+  margin-top: 300px;
 }
