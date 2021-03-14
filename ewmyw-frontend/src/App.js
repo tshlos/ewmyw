@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Login from './components/auth/Login';
 import Navbar from './components/Navbar';
 import Registration from './components/auth/Registration';
+import MainPage from './components/MainPage';
 
 class App extends Component {
 
@@ -30,56 +31,56 @@ class App extends Component {
 
   handleLogoutClick = async (event) => {
     event.preventDefault();
-    
+
     let resp;
     try {
-    resp = await fetch("http://localhost:3000/api/v1/logout", {
+      resp = await fetch("http://localhost:3000/api/v1/logout", {
         method: 'DELETE',
         credentials: "include",
-    });
+      });
     } catch (e) {
-        console.log("Failed to logout", e)
+      console.log("Failed to logout", e)
     }
     const userLoggedOut = await resp.json();
     this.setState({
-      loggedInStatus: "Not logged in", 
+      loggedInStatus: "Not logged in",
       user: {}
     });
-    window.location.href = '/login';
+    window.location.href = "/login";
   }
-
 
   render() {
     return (
       <div>
         <BrowserRouter>
-        <Navbar 
-          handleLogoutClick={this.handleLogoutClick}
-          user={this.state.user} 
-        /> 
-        <Route 
-          path="/login" 
-          render={(props) => (
-            <Login 
-              {...props}
-              handleLogoutClick={this.handleLogoutClick}
-            />
-          )} 
-        />
-        <Route 
-          path="/signup" component={Registration} 
-        />
-        <Route exact path="/" 
-          render={props => (
-            <Home {...props}
-              handleLogoutClick={this.handleLogoutClick}
-              user={this.state.user} 
-            /> 
-          )}
-        />
-      </BrowserRouter>
-    </div>
+          <Navbar
+            handleLogoutClick={this.handleLogoutClick}
+            user={this.state.user}
+          />
+          <Route
+            path="/login"
+            render={(props) => (
+              <Login
+                {...props}
+                handleLogoutClick={this.handleLogoutClick}
+              />
+            )}
+          />
+          <Route path="/signup" component={Registration} />
+          <Route path="/search-podcasts"
+            render={props => (
+              <Home {...props}
+                handleLogoutClick={this.handleLogoutClick}
+                user={this.state.user}
+              />
+            )}
+          />
+          <Route exact path="/" component={MainPage} />
+        </BrowserRouter>
+      </div>
+
+
     )
   }
 }
-export default App; 
+export default App;

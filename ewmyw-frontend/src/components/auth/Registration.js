@@ -42,7 +42,7 @@ export default class Registration extends Component {
         const newUser = await resp.json();
         
         if (newUser.status === 'created') {
-            window.location.href = '/';
+            window.location.href = '/search-podcasts';
         } else {
             this.setState({
                 isInvalid: true

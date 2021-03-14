@@ -9,7 +9,6 @@ Rails.application.routes.draw do
       delete :logout, to: "sessions#logout"
       get :logged_in, to: "sessions#logged_in?"
 
-      get "/podcasts", to: "spotify#spotify_request"
       get "/search", to: "spotify#spotify_search"
 
     end

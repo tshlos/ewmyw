@@ -34,7 +34,7 @@ export default class Login extends Component {
         const loggedInUser = await resp.json();
 
         if (loggedInUser.logged_in) {
-            window.location.href = '/';
+            window.location.href = '/search-podcasts';
         } else {
             this.setState({
                 isInvalid: true

@@ -18,6 +18,7 @@ class Home extends Component {
 
     handleSearchChange = async (e) => {
         e.preventDefault();
+        
         this.setState({
             query: e.target.value,
             pages: 1
@@ -61,9 +62,7 @@ class Home extends Component {
                 credentials: "include"
             });
         }
-        this.setState({
-            a: 1
-        });
+        this.forceUpdate();
     }
 
     render() {
@@ -91,7 +90,7 @@ class Home extends Component {
                         </div>
                     </div>
                     <ParallaxEffect />
-                    <Sidebar a={this.state.a} />
+                    <Sidebar />
                     <div className="droppable-container">
                         <Droppable droppableId={"home"}>
                             {(provided) => {
